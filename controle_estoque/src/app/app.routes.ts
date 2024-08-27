@@ -1,14 +1,8 @@
 import { Routes } from '@angular/router';
+import { HeaderComponent } from './components/header/header.component';
 
 export const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'folder/inbox',
-    pathMatch: 'full',
-  },
-  {
-    path: 'folder/:id',
-    loadComponent: () =>
-      import('./folder/folder.page').then((m) => m.FolderPage),
-  },
+   path: '', component: HeaderComponent}
+
 ];
