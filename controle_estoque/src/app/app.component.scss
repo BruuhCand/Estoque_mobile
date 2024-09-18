@@ -1,5 +1,9 @@
 ion-menu ion-content {
-  --background: var(--ion-item-background, var(--ion-background-color, #fff));
+  --background: var(--ion-background-color, #65558F);
+}
+
+.color{
+  --background: var(--ion-background-color, #65558F);
 }
 
 ion-menu.md ion-content {
@@ -22,9 +26,7 @@ ion-menu.md ion-note {
   padding-left: 10px;
 }
 
-ion-menu.md ion-list#inbox-list {
-  border-bottom: 1px solid var(--ion-background-color-step-150, #d7d8da);
-}
+
 
 ion-menu.md ion-list#inbox-list ion-list-header {
   font-size: 22px;
@@ -49,9 +51,7 @@ ion-menu.md ion-item {
   border-radius: 4px;
 }
 
-ion-menu.md ion-item.selected {
-  --background: rgba(var(--ion-color-primary-rgb), 0.14);
-}
+
 
 ion-menu.md ion-item.selected ion-icon {
   color: var(--ion-color-primary);
@@ -85,7 +85,7 @@ ion-menu.ios ion-item {
 }
 
 ion-menu.ios ion-item.selected ion-icon {
-  color: var(--ion-color-primary);
+  color: var(--ion-color-primary);  
 }
 
 ion-menu.ios ion-item ion-icon {
@@ -116,4 +116,50 @@ ion-note {
 
 ion-item.selected {
   --color: var(--ion-color-primary);
+}
+
+ion-item{
+  --background: var(--ion-background-color, #65558F);
+}
+
+ion-list{
+  --background: var(--ion-background-color, #65558F);
+}
+
+/* Forçar o fundo roxo no ion-menu */
+ion-menu {
+  --background: #65558F !important; /* Cor de fundo no ion-menu */
+}
+
+/* Forçar o fundo roxo no ion-content */
+ion-menu ion-content {
+  --background: #65558F !important; /* Cor de fundo no ion-content */
+}
+
+/* Se necessário, aplicar o fundo diretamente no ion-list também */
+ion-menu ion-list {
+  background-color: #65558F !important;
+}
+
+/* Mover a lista um pouco mais para baixo */
+ion-list#inbox-list {
+  margin-top: 30px; /* Move a lista 30px para baixo */
+}
+
+/* Tornar os ícones brancos */
+ion-menu ion-item ion-icon {
+  color: white !important; /* Forçar ícones brancos */
+}
+
+/* Tornar as letras brancas */
+ion-menu ion-item ion-label {
+  color: white !important; /* Forçar texto branco */
+}
+
+/* Aumentar o espaçamento entre os itens */
+ion-menu ion-item {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  margin-bottom: 15px; /* Espaçamento entre os itens */
+  border-radius: 4px;
 }
