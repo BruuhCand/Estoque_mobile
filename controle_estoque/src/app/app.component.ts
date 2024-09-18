@@ -14,10 +14,10 @@ import { mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, heartOutlin
 })
 export class AppComponent {
   public appPages = [
-    { title: 'Estoques', url: '/folder/outbox', icon: 'home' },
-    { title: 'Controle produto', url: '/folder/inbox', icon: 'cube' },
-    { title: 'Histórico', url: '/folder/favorites', icon: 'analytics' },
-    { title: 'Configurações', url: '/folder/archived', icon: 'settings' },
+    { title: 'Estoques', url: '/estoques', icon: 'home' },
+    { title: 'Controle produto', url: '', icon: 'cube' },
+    { title: 'Histórico', url: '', icon: 'analytics' },
+    { title: 'Configurações', url: '', icon: 'settings' },
   ];
   constructor() {
     addIcons({ cubeOutline, cubeSharp, homeOutline, homeSharp, settingsOutline, settingsSharp, analyticsOutline, analyticsSharp});
