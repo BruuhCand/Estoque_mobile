@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { IonicModule} from '@ionic/angular';
 import { Estoque } from 'src/app/model/estoque';
 import { add, home, homeOutline,list,listOutline, sadOutline, settings, settingsOutline } from 'ionicons/icons';
@@ -11,7 +11,7 @@ import { addIcons } from 'ionicons';
   templateUrl: './estoque-list.page.html',
   styleUrls: ['./estoque-list.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule]
+  imports: [IonicModule, CommonModule, RouterModule]
 })
 export class EstoqueListPage implements OnInit {
 
@@ -27,7 +27,7 @@ export class EstoqueListPage implements OnInit {
   ] 
 
   ngOnInit() {
-    this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;
+   
   }
 
 }
