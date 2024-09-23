@@ -1,0 +1,29 @@
+<div id="container">
+
+  <ion-list lines="none">
+    <ion-item class="custom-item">
+      <ion-label>Todos produtos</ion-label>
+    </ion-item>
+    <ion-item class="custom-item">
+      <ion-label>Lista de compras</ion-label>
+    </ion-item>
+    <ion-item class="custom-item">
+      <ion-label>Abaixo do estoque</ion-label>
+    </ion-item>
+    <ion-item class="custom-item">
+      <ion-label>Próximo vencimento</ion-label>
+    </ion-item>
+    <ion-item class="custom-item">
+      <ion-label>Produtos vencidos</ion-label>
+    </ion-item>
+  </ion-list>
+
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="botao">
+    <ion-router-link routerLink="/estoque/criate">
+      <ion-button shape="round">
+        <ion-icon slot="icon-only" name="add" class="button-redondo"></ion-icon>
+      </ion-button>
+    </ion-router-link>
+  </ion-fab>
+</div>

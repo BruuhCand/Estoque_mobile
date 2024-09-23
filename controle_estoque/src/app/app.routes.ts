@@ -12,8 +12,13 @@ export const routes: Routes = [
     loadComponent: () => import('./page/estoque/estoque-list/estoque-list.page').then(m => m.EstoqueListPage),
   },
   {
-    path: ':id',
-    loadComponent: () => import('./page/estoque/estoque-detail/estoque-detail.page').then(m => m.EstoqueDetailPage)
+    path: 'estoque/:id',
+    loadComponent: () => import('./page/estoque/estoque-detail/estoque-detail.page').then(m => m.EstoqueDetailPage),
+    children:[
+      {path: '', 
+      loadComponent: () => import('./page/estoque/estoque-detail/estoque-geral/estoque-geral.component').then(m => m.EstoqueGeralComponent)
+      }
+    ]
   },
   {
     path: 'estoque/criate',

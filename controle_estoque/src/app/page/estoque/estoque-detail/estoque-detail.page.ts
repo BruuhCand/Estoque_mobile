@@ -1,20 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonicModule } from '@ionic/angular';
+import { addIcons } from 'ionicons';
+import { add, home, homeOutline, list, listOutline, sadOutline, settings, settingsOutline } from 'ionicons/icons';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { Estoque } from 'src/app/model/estoque';
 
 @Component({
   selector: 'app-estoque-detail',
   templateUrl: './estoque-detail.page.html',
   styleUrls: ['./estoque-detail.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, RouterModule]
 })
 export class EstoqueDetailPage implements OnInit {
 
-  constructor() { }
+  titulo: string = "Estoque ";
+  private activatedRoute = inject(ActivatedRoute);
+
+
+  constructor() { 
+    addIcons({sadOutline, add, homeOutline, listOutline, settingsOutline, home, list, settings })
+
+  }
 
   ngOnInit() {
+    this.titulo += this.activatedRoute.snapshot.paramMap.get('id') as string ;
   }
 
 }

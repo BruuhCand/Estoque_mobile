@@ -10,7 +10,9 @@
       <div *ngIf="estoques.length > 0; else zerado">
           <ion-list *ngFor="let estoque of estoques" lines="none">
               <ion-item class="custom-item">
-                  <ion-label>{{estoque.nome}}</ion-label>
+                <ion-router-link routerLink="['/estoque', estoque.nome]">
+                    <ion-label>{{estoque.nome}}</ion-label>
+                </ion-router-link>
               </ion-item>
           </ion-list>
       </div>

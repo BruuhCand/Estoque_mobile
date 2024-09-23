@@ -15,8 +15,7 @@ import { addIcons } from 'ionicons';
 })
 export class EstoqueListPage implements OnInit {
 
-  public folder!: string;
-  private activatedRoute = inject(ActivatedRoute);
+  
   constructor() { 
     addIcons({sadOutline, add, homeOutline, listOutline, settingsOutline, home, list, settings })
   }

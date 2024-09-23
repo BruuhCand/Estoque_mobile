@@ -1,0 +1,37 @@
+:host {
+    ion-content {
+        background-color: #D9D9D9 !important; /* Cor de fundo do conteúdo */
+    }
+
+    ion-toolbar {
+        background-color: #D9D9D9   !important; /* Cor do cabeçalho */
+    }
+}
+
+
+#container {
+    margin: 10% 15%;
+}
+
+.header {
+    margin-top: 10%;
+}
+
+
+
+ion-col {
+    text-align: center;
+}
+
+.icon {
+    width: 50px;
+    height: 30px;
+}
+
+ion-button{
+    display: block;
+  margin: 20% auto;  
+  width: 50%;    
+    
+}
+
