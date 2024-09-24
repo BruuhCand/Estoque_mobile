@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { ListUtilComponent } from 'src/app/component/list-util/list-util.component';
 
@@ -18,13 +18,15 @@ export class EstoqueGeralComponent  implements OnInit {
   atributos: string[] = ["nome"];
 
   estoqueGeral: any = [
-    {nome: "Todos produtos"},
-    {nome: "Lista de compras"},
-    {nome: "Abaixo do estoque"},
-    {nome: "Próximo vencimento"},
-    {nome: "Produtos vencidos"}
+    {nome: "Todos produtos", url: "produtos"},
+    {nome: "Lista de compras", url: "compras"},
+    {nome: "Abaixo do estoque", url: "estoquemin"},
+    {nome: "Próximo vencimento", url: "vencimento"},
+    {nome: "Produtos vencidos", url: "vencidos"}
   ]
-  constructor() { }
+
+  pagina: string = "estoque"
+  constructor(private route: Router) { }
 
   ngOnInit() {}
 

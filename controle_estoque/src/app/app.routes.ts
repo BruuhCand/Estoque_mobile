@@ -1,5 +1,4 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
@@ -12,11 +11,16 @@ export const routes: Routes = [
     loadComponent: () => import('./page/estoque/estoque-list/estoque-list.page').then(m => m.EstoqueListPage),
   },
   {
-    path: 'estoque/:id',
+    path: 'estoque/:nome',
     loadComponent: () => import('./page/estoque/estoque-detail/estoque-detail.page').then(m => m.EstoqueDetailPage),
-    children:[
-      {path: '', 
-      loadComponent: () => import('./page/estoque/estoque-detail/estoque-geral/estoque-geral.component').then(m => m.EstoqueGeralComponent)
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./page/estoque/estoque-detail/estoque-geral/estoque-geral.component').then(m => m.EstoqueGeralComponent)
+      },
+      {
+        path: 'produtos',
+        loadComponent: () => import('./page/estoque/estoque-detail/estoque-all-produtos/estoque-all-produtos.component').then(m => m.EstoqueAllProdutosComponent)
       }
     ]
   },

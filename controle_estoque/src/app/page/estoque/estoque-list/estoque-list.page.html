@@ -7,24 +7,12 @@
 
 <ion-content [fullscreen]="true">
   <div id="container">
-      <div *ngIf="estoques.length > 0; else zerado">
-          <ion-list *ngFor="let estoque of estoques" lines="none">
-              <ion-item class="custom-item">
-                <ion-router-link routerLink="['/estoque', estoque.nome]">
-                    <ion-label>{{estoque.nome}}</ion-label>
-                </ion-router-link>
-              </ion-item>
-          </ion-list>
-      </div>
-      <ng-template #zerado>
-          <p>teste</p>
-      </ng-template>
+      <app-list-util [dadosList] = "estoques" [atributos] = "atributos" [entity]="pagina"></app-list-util>
+
       <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="botao">
-        <ion-router-link routerLink="/estoque/criate">
-          <ion-button shape="round" >
+          <ion-button shape="round" (click)="navegar()">
             <ion-icon slot="icon-only" name="add" class="button-redondo"></ion-icon>
           </ion-button>
-        </ion-router-link>
       </ion-fab>
   </div>
 </ion-content>

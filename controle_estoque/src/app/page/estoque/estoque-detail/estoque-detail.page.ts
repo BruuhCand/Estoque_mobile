@@ -16,7 +16,7 @@ import { Estoque } from 'src/app/model/estoque';
 })
 export class EstoqueDetailPage implements OnInit {
 
-  titulo: string = "Estoque";
+  titulo: string = "Estoque ";
   private activatedRoute = inject(ActivatedRoute);
 
 
@@ -26,7 +26,10 @@ export class EstoqueDetailPage implements OnInit {
   }
 
   ngOnInit() {
-    this.titulo += this.activatedRoute.snapshot.paramMap.get('id') as string ;
+    console.log(this.activatedRoute.snapshot.paramMap.get('nome') as string);
+    this.titulo = this.titulo + this.activatedRoute.snapshot.paramMap.get('nome') as string ;
   }
+
+  
 
 }

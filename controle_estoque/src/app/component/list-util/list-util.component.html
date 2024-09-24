@@ -1,13 +1,11 @@
 <div *ngIf="dadosList.length > 0; else zerado">
   <ion-list lines="none">
-    <ion-item *ngFor="let list of dadosList" class="custom-item">
-      <ion-router-link [routerLink]="['/estoque', list.nome, tipoList]" style="display: flex; justify-content: space-between; width: 100%;">
-        <div style="flex: 1; display: flex; justify-content: space-between;">
+    <ion-item *ngFor="let list of dadosList" class="custom-item" >
+        <div style="flex: 1; display: flex; justify-content: space-between;" (click)="navegar(list)">
           <ng-container *ngFor="let carac of atributos">
             <ion-label>{{ list[carac] }}</ion-label>
           </ng-container>
         </div>
-      </ion-router-link>
     </ion-item>
   </ion-list>
 </div>

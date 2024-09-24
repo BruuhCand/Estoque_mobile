@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
@@ -14,11 +14,22 @@ export class ListUtilComponent  implements OnInit {
 
   @Input() dadosList: any[] = [];
   @Input() atributos: string[] = [];
-  @Input()  tipoList: string = "";
-
-  constructor() { }
+  @Input() entity: string = "";
+  constructor(private router: Router) { }
 
   ngOnInit() {
+    console.log(this.dadosList)
+  }
+
+  navegar(objeto: any){
+    console.log("entrou aqui")
+
+    if(objeto.url != ""){
+      this.router.navigate([`/${this.entity}`, objeto.nome, objeto.url]);
+    }
+    else{
+      this.router.navigate([`/${this.entity}`, objeto.nome]);
+    }
   }
 
 }
