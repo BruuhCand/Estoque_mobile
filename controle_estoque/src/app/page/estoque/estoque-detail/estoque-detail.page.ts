@@ -16,7 +16,7 @@ import { Estoque } from 'src/app/model/estoque';
 })
 export class EstoqueDetailPage implements OnInit {
 
-  titulo: string = "Estoque ";
+  titulo: string = "Estoque";
   private activatedRoute = inject(ActivatedRoute);
 
 

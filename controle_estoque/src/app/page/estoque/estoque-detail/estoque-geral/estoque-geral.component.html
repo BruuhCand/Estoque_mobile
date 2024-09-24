@@ -1,23 +1,6 @@
 <div id="container">
 
-  <ion-list lines="none">
-    <ion-item class="custom-item">
-      <ion-label>Todos produtos</ion-label>
-    </ion-item>
-    <ion-item class="custom-item">
-      <ion-label>Lista de compras</ion-label>
-    </ion-item>
-    <ion-item class="custom-item">
-      <ion-label>Abaixo do estoque</ion-label>
-    </ion-item>
-    <ion-item class="custom-item">
-      <ion-label>Próximo vencimento</ion-label>
-    </ion-item>
-    <ion-item class="custom-item">
-      <ion-label>Produtos vencidos</ion-label>
-    </ion-item>
-  </ion-list>
-
+  <app-list-util [dadosList] = "estoqueGeral" [atributos] = "atributos"></app-list-util>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="botao">
     <ion-router-link routerLink="/estoque/criate">
