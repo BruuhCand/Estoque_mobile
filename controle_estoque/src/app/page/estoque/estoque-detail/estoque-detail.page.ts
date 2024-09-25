@@ -18,7 +18,7 @@ export class EstoqueDetailPage implements OnInit {
 
   titulo: string = "Estoque ";
   private activatedRoute = inject(ActivatedRoute);
-
+  
 
   constructor() { 
     addIcons({sadOutline, add, homeOutline, listOutline, settingsOutline, home, list, settings })
@@ -26,8 +26,10 @@ export class EstoqueDetailPage implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.activatedRoute.snapshot.paramMap.get('nome') as string);
+    console.log(this.activatedRoute.snapshot.paramMap.get('id') as string);
     this.titulo = this.titulo + this.activatedRoute.snapshot.paramMap.get('nome') as string ;
+
+    //fazer um getBy id e colocar o nome
   }
 
   

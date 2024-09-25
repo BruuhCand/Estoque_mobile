@@ -33,7 +33,7 @@ export class EstoqueListPage implements OnInit {
   }
 
   navegar(){
-    this.router.navigate(['estoque/criate'])
+    this.router.navigate([`/estoque/criate`])
   }
 
 }

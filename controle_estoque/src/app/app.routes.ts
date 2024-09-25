@@ -11,7 +11,7 @@ export const routes: Routes = [
     loadComponent: () => import('./page/estoque/estoque-list/estoque-list.page').then(m => m.EstoqueListPage),
   },
   {
-    path: 'estoque/:nome',
+    path: 'estoque/:id',
     loadComponent: () => import('./page/estoque/estoque-detail/estoque-detail.page').then(m => m.EstoqueDetailPage),
     children: [
       {
@@ -27,5 +27,14 @@ export const routes: Routes = [
   {
     path: 'estoque/criate',
     loadComponent: () => import('./page/estoque/estoque-criate/estoque-criate.page').then(m => m.EstoqueCriatePage)
+  },
+  {
+    path: 'produto/create',
+    loadComponent: () => import('./page/produto/produto-create/produto-create.page').then( m => m.ProdutoCreatePage)
+  },
+  {
+    path: 'produto/:id',
+    loadComponent: () => import('./page/produto/produto-create/produto-create.page').then( m => m.ProdutoCreatePage)
   }
+
 ];

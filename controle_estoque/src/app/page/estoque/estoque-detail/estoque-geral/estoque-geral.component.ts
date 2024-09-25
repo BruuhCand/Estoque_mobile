@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { ListUtilComponent } from 'src/app/component/list-util/list-util.component';
 
@@ -24,10 +24,19 @@ export class EstoqueGeralComponent  implements OnInit {
     {nome: "Próximo vencimento", url: "vencimento"},
     {nome: "Produtos vencidos", url: "vencidos"}
   ]
-
+  private activatedRoute = inject(ActivatedRoute);
   pagina: string = "estoque"
   constructor(private route: Router) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    var id = this.activatedRoute.snapshot.paramMap.get('id') as string 
+    
+
+    if (id) {
+      this.estoqueGeral = this.estoqueGeral.map((item: any) => {
+        return { ...item, id: id }; 
+      });
+    }
+  }
 
 }

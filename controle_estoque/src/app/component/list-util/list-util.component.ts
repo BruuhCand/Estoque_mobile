@@ -24,12 +24,21 @@ export class ListUtilComponent  implements OnInit {
   navegar(objeto: any){
     console.log("entrou aqui")
 
-    if(objeto.url != ""){
-      this.router.navigate([`/${this.entity}`, objeto.nome, objeto.url]);
+    var construUrl = this.entity
+
+    if(objeto.id){
+      construUrl += "/" + objeto.id;
     }
-    else{
-      this.router.navigate([`/${this.entity}`, objeto.nome]);
+
+    if(objeto.url){
+      construUrl += "/" + objeto.url
     }
+
+    if (construUrl != this.entity){
+
+      this.router.navigate([`/${construUrl}`]);
+    }
+    
   }
 
 }
