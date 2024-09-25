@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { addIcons } from 'ionicons';
-import { add, home, homeOutline, list, listOutline, sadOutline, settings, settingsOutline } from 'ionicons/icons';
+import { add, create, home, homeOutline, list, listOutline, remove, sadOutline, settings, settingsOutline, trash } from 'ionicons/icons';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Estoque } from 'src/app/model/estoque';
 
@@ -21,7 +21,7 @@ export class EstoqueDetailPage implements OnInit {
   
 
   constructor() { 
-    addIcons({sadOutline, add, homeOutline, listOutline, settingsOutline, home, list, settings })
+    addIcons({sadOutline, add, homeOutline, listOutline, settingsOutline, home, list, settings, remove, trash, create})
 
   }
 

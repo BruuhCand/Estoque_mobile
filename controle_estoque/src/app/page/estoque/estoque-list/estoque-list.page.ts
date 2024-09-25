@@ -22,8 +22,8 @@ export class EstoqueListPage implements OnInit {
   }
 
   public estoques: Estoque[] = [
-    {id: 1, nome: "bruna", url: ""},
-    {id: 2, nome: "roupa", url: ""},
+    {id: 1, nome: "bruna"},
+    {id: 2, nome: "roupa"},
   ] 
 
   atributos: string[] = ['nome'];
@@ -33,7 +33,7 @@ export class EstoqueListPage implements OnInit {
   }
 
   navegar(){
-    this.router.navigate([`/estoque/criate`])
+    this.router.navigate([`/estoques/create`])
   }
 
 }

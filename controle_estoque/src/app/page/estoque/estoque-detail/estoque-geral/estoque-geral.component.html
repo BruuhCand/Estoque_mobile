@@ -7,4 +7,9 @@
         <ion-icon slot="icon-only" name="add" class="button-redondo"></ion-icon>
       </ion-button>
   </ion-fab>
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed" class="botao" (click) = "adicionaProd()">
+    <ion-button shape="round" >
+      <ion-icon slot="icon-only" name="remove" class="button-redondo"  (click) = "removeProd()"></ion-icon>
+    </ion-button>
+</ion-fab>
 </div>

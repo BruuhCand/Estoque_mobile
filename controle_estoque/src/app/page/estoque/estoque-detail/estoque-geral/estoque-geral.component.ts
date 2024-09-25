@@ -39,4 +39,12 @@ export class EstoqueGeralComponent  implements OnInit {
     }
   }
 
+  adicionaProd(){
+    this.route.navigate([`/produto/create`])
+  }
+
+  removeProd(){
+    
+  }
+
 }

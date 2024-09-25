@@ -25,12 +25,8 @@ export const routes: Routes = [
     ]
   },
   {
-    path: 'estoque/criate',
+    path: 'estoques/create',
     loadComponent: () => import('./page/estoque/estoque-criate/estoque-criate.page').then(m => m.EstoqueCriatePage)
-  },
-  {
-    path: 'produto/create',
-    loadComponent: () => import('./page/produto/produto-create/produto-create.page').then( m => m.ProdutoCreatePage)
   },
   {
     path: 'produto/:id',
