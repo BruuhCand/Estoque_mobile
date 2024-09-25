@@ -4,34 +4,104 @@
   </ion-buttons>
   <ion-title>Cadastro de produtos</ion-title>
   <div slot="end">
-    <ion-icon class="icon-header" name="create"></ion-icon>
-    <ion-icon class="icon-header" name="trash"></ion-icon>
+    <ion-icon class="icon-header" *ngIf="isEdit" name="trash"></ion-icon>
   </div>
-
 </ion-toolbar>
 
-<ion-content [fullscreen]="true">
-  <ion-list>
-    <ion-item>
-      <ion-input label="Text input" placeholder="Enter text"></ion-input>
-    </ion-item>
+<ion-content>
+  <form [formGroup]="formularioProduto" (ngSubmit)="onSubmit()">
+    <ion-list>
+      <ion-item class="custom-item">
+        <ion-select placeholder="Selecione um estoque" label-placement="floating" fill="outline" formControlName="estoqueId">
+          <div slot="label">Estoque</div>
+          <ion-select-option *ngFor="let categoria of categorias" [value]="categoria.id">
+            {{ categoria.nome }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
 
-    <ion-item>
-      <ion-input label="Number input" type="number" placeholder="000"></ion-input>
-    </ion-item>
+      <ion-item class="custom-item">
+        <ion-input label="Nome" type="text" label-placement="floating" fill="outline" formControlName="nome"></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-input label="Password input" type="password" value="password"></ion-input>
-    </ion-item>
+      <ion-item class="custom-item">
+        <ion-input label="Codigo Barras" type="number" label-placement="floating" fill="outline" placeholder="000" formControlName="codigoBarras"></ion-input>
+      </ion-item>
+      <ion-item class="custom-item">
+        <ion-button (click)="procuraItem(formularioProduto.get('codigoBarras')?.value, true)">Procurar produto</ion-button>
+      </ion-item>
 
-    <ion-item>
-      <ion-input label="Email input" type="email" placeholder="email@domain.com"></ion-input>
-    </ion-item>
+      <ion-item class="custom-item">
+        <ion-input label="Quantidade estoque" type="number" label-placement="floating" fill="outline" placeholder="000" formControlName="qntEstoque" ></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-input label="Telephone input" type="tel" placeholder="888-888-8888"></ion-input>
-    </ion-item>
-  </ion-list>
+      <ion-item class="custom-item">
+        <ion-input label="Quantidade miníma" type="number" label-placement="floating" fill="outline" placeholder="000" formControlName="qntMinima"></ion-input>
+      </ion-item>
+
+      <ion-item class="custom-item">
+        <ion-select placeholder="Selecione uma categoria" label-placement="floating" fill="outline" formControlName="categoriaId">
+          <div slot="label">Categoria</div>
+          <ion-select-option *ngFor="let categoria of categorias" [value]="categoria.id">
+            {{ categoria.nome }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item class="custom-item">
+        <ion-checkbox (click)="modal.present()">Não encontrei a categoria</ion-checkbox>
+      </ion-item>
+
+      <ion-item class="custom-item">
+        <ion-toggle [checked]="true" formControlName="ativo">Ativo</ion-toggle><br /><br />
+      </ion-item>
+
+      <ion-item class="custom-item">
+        <ion-input label="Valor pago" label-placement="floating" fill="outline" type="number" placeholder="000" formControlName="valor"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-button type="submit" expand="full" id="present-alert" [disabled]="formularioProduto.invalid">Enviar</ion-button>
+  </form>
+
+  <ion-modal [isOpen]="isModalOpen" (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Cancel</ion-button>
+          </ion-buttons>
+          <ion-title>Nova Categoria</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="confirm()" [strong]="true">Confirmar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-input
+            label="Nome da Categoria"
+            label-placement="floating" 
+            fill="outline"
+            type="text"
+            placeholder="Nome categoria"
+            [(ngModel)]="nameCategoria"
+          ></ion-input>
+        </ion-item>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+  <ion-toast
+    [isOpen]="isToastOpen"
+    message="{{mensagemToast}}"
+    [duration]="4000"
+    (didDismiss)="procuraItem('', false)"
+  ></ion-toast>
+  <ion-alert
+  trigger="present-alert"
+  header="Produto salvo com sucesso!! Deseja adicionar um novo produto ao estoque?"
+  [buttons]="alertButtons"
+></ion-alert>
 </ion-content>
 
 <ion-toolbar>
