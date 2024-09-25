@@ -26,6 +26,7 @@ export class ProdutoCreatePage implements OnInit {
   isModalOpen: boolean = false;
   isToastOpen = false;
   mensagemToast: string = "Produto não encontrado"
+  dadosRecebidos: any
 
   categorias: Categoria[] = [
     {id: 1, nome: "Camiseta" },
@@ -58,14 +59,25 @@ export class ProdutoCreatePage implements OnInit {
 
       this.loadDataForEditing();
     }
+    else{
+      console.log("url")
+      this.valoresUrl()
+    }
+
     this.formularioProduto.get('ativo')?.valueChanges.subscribe(value => {
       this.formularioProduto.get('ativo')?.setValue(value ? 1 : 0, { emitEvent: false });
     });
 
-    this.formularioProduto.get('codigoBarras')?.valueChanges.subscribe(value => {
-      console.log("codigo de barras alterado")
-    });
   }
+
+    valoresUrl(){
+      const navigation = this.router.getCurrentNavigation();
+      if (navigation  && navigation.extras.state !== undefined ) {
+        this.dadosRecebidos = navigation.extras.state['estoqueId'];
+        this.formularioProduto.get('estoqueId')?.setValue(this.dadosRecebidos);
+      }
+        //ver pq n esta mostrando no front corretamente
+    }
 
   onSubmit() {
     console.log(this.formularioProduto.value); // Retorna {nome: ..., preco: ...}

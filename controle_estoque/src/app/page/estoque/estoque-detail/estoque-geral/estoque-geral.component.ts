@@ -27,20 +27,23 @@ export class EstoqueGeralComponent  implements OnInit {
   private activatedRoute = inject(ActivatedRoute);
   pagina: string = "estoque"
   constructor(private route: Router) { }
-
+  idPagina: any;
   ngOnInit() {
-    var id = this.activatedRoute.snapshot.paramMap.get('id') as string 
+    this.idPagina = this.activatedRoute.snapshot.paramMap.get('id') as string 
     
 
-    if (id) {
+    if (this.idPagina) {
       this.estoqueGeral = this.estoqueGeral.map((item: any) => {
-        return { ...item, id: id }; 
+        return { ...item, id: this.idPagina }; 
       });
     }
   }
 
   adicionaProd(){
-    this.route.navigate([`/produto/create`])
+    console.log("entrou aquiii2")
+    this.route.navigate(([`/produto/create`]), {
+      state: { estoqueId: this.idPagina},
+    });
   }
 
   removeProd(){
