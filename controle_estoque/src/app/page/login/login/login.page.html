@@ -1,0 +1,29 @@
+<ion-header collapse="condense">
+  <ion-toolbar>
+    <ion-title size="large" class="header">Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+
+
+  <div>
+
+    <form [formGroup]="form" (ngSubmit)="logar()">
+      <ion-input label="Email" label-placement="floating" fill="outline" type="email" class="custom-item" formControlName="email"></ion-input>
+      <br>
+      <ion-input label="Senha" label-placement="floating" fill="outline" type="password" class="custom-item" formControlName="senha"></ion-input>
+      
+      <ion-button type="submit" expand="full" class="botao" [disabled]="form.invalid">Enviar</ion-button>
+    </form>
+    
+  </div>
+</ion-content>
+
+<ion-toast
+    [isOpen]="isToastOpen"
+    message="{{mensagemToast}}"
+    [duration]="4000"
+    (didDismiss)="mensagemLogin(false, false)"
+  ></ion-toast>

@@ -28,7 +28,7 @@
         <ion-input label="Codigo Barras" type="number" label-placement="floating" fill="outline" placeholder="000" formControlName="codigoBarras"></ion-input>
       </ion-item>
       <ion-item class="custom-item">
-        <ion-button (click)="procuraItem(formularioProduto.get('codigoBarras')?.value, true)">Procurar produto</ion-button>
+        <ion-button (click)="procuraItem(formularioProduto.get('codigoBarras')?.value, true)" [disabled] = "isEdit">Procurar produto</ion-button>
       </ion-item>
 
       <ion-item class="custom-item">
