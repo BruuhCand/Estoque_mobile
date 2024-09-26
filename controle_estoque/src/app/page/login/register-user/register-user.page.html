@@ -1,13 +1,36 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>register-user</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-toolbar class="header">
+  <ion-title>Cadastro de Users</ion-title>
+</ion-toolbar>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">register-user</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="div">
+  <form [formGroup]="formRegister" (ngSubmit)="onSubmit()">
+    <ion-list>
+    
+      <ion-item class="custom-item">
+        <ion-input label="Nome" type="text" label-placement="floating" fill="outline" formControlName="nome"></ion-input>
+      </ion-item>
+
+      <ion-item class="custom-item">
+        <ion-input label="Email" type="email" label-placement="floating" fill="outline"  formControlName="email"></ion-input>
+      </ion-item>
+      
+      <ion-item class="custom-item">
+        <ion-input label="Senha" type="text" label-placement="floating" fill="outline"  formControlName="senha" ></ion-input>
+      </ion-item>
+
+      <ion-item class="custom-item">
+        <ion-input label="Role" type="text" label-placement="floating" fill="outline"  formControlName="role"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-button type="submit" expand="full" [disabled]="formRegister.invalid">Enviar</ion-button>
+  </form>
+
 </ion-content>
+
+<ion-toast
+    [isOpen]="isToastOpen"
+    message="{{mensagemToast}}"
+    [duration]="4000"
+    (didDismiss)="openToast(false, false)"
+  ></ion-toast>

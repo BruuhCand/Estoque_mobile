@@ -4,7 +4,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { IonicModule } from '@ionic/angular';
 import { LoginService } from 'src/app/service/login.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { User } from 'src/app/model/user';
 
@@ -13,7 +13,7 @@ import { User } from 'src/app/model/user';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule]
+  imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule, RouterLink]
   
 })
 export class LoginPage implements OnInit {
@@ -33,9 +33,8 @@ export class LoginPage implements OnInit {
   }
 
   logar(){
-    console.log(this.form)
+    
     if (this.form.valid && this.form.value != null) {
-      console.log("entrou aqui")
       const userLogin: User = {
         email: this.form.get('email')?.value,
         senha: this.form.get('senha')?.value
@@ -65,6 +64,10 @@ export class LoginPage implements OnInit {
     }
 
     this.isToastOpen = isOpen
+  }
+
+  irRegister(){
+    this.router.navigate([`/register-user`])
   }
 
 }

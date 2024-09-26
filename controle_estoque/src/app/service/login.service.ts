@@ -14,7 +14,6 @@ export class LoginService {
 
   // Método de login que envia o email e a senha para a API
   login(user: User): Observable<any> {
-    console.log(user)
     return this.http.post<{ token: string }>(`${API_CONFIG.baseUrl}/Login`, user)
       .pipe(
         tap(response => {
@@ -26,6 +25,11 @@ export class LoginService {
           return throwError(() => new Error('Falha no login, tente novamente.'));
         })
       );
+  }
+
+  createUser(user: User): Observable<any> {
+    console.log(user)
+    return this.http.post<{ token: string }>(`${API_CONFIG.baseUrl}/Usuario`, user)
   }
 
   // Método para armazenar o token no localStorage
