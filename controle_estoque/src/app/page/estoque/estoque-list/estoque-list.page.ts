@@ -6,6 +6,7 @@ import { Estoque } from 'src/app/model/estoque';
 import { add, home, homeOutline,list,listOutline, sadOutline, settings, settingsOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { ListUtilComponent } from 'src/app/component/list-util/list-util.component';
+import { EstoqueService } from 'src/app/service/estoque.service';
 
 @Component({
   selector: 'app-estoque-list',
@@ -17,19 +18,24 @@ import { ListUtilComponent } from 'src/app/component/list-util/list-util.compone
 export class EstoqueListPage implements OnInit {
 
   
-  constructor(private router: Router) { 
+  constructor(private router: Router, private estoqueService: EstoqueService) { 
     addIcons({sadOutline, add, homeOutline, listOutline, settingsOutline, home, list, settings })
   }
 
-  public estoques: Estoque[] = [
-    {id: 1, nome: "bruna"},
-    {id: 2, nome: "roupa"},
-  ] 
+  estoques: Estoque[] = [] 
 
   atributos: string[] = ['nome'];
   pagina: string = "estoque"
+  
   ngOnInit() {
-   
+   this.estoqueService.getAll().subscribe({
+    next: (response) => {
+      this.estoques = response
+    },
+    error: (err) => {
+      console.log(err)
+    }
+   })
   }
 
   navegar(){

@@ -15,12 +15,7 @@ import { Produto } from 'src/app/model/produto';
 export class EstoqueAllProdutosComponent  implements OnInit {
 
   private activatedRoute = inject(ActivatedRoute);
-  produtos: Produto[] = [
-    {id: 1, nome: "Produto1", codBarras: 1234, qntEstoque: 10, qntMinima: 2, categoriaId: 1, ativo: 1, valor: 10.00, validade: new Date('01/01/2001'),
-       estoqueId: Number(this.activatedRoute.snapshot.paramMap.get('id')) },
-    {id: 2, nome: "Produto2", codBarras: 1234, qntEstoque: 10, qntMinima: 2, categoriaId: 1, ativo: 1, valor: 10.00, validade: new Date('01/01/2001'), 
-      estoqueId: Number(this.activatedRoute.snapshot.paramMap.get('id'))},
-  ]
+  produtos: any[] = []
   listar: any[] = []
   atributos: string[] = ["nome", "qntEstoque", "valor"]
   pagina: string = "produto"

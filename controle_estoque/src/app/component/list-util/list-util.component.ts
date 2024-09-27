@@ -36,7 +36,9 @@ export class ListUtilComponent  implements OnInit {
 
     if (construUrl != this.entity){
 
-      this.router.navigate([`/${construUrl}`]);
+      this.router.navigate([`/${construUrl}`]).then(() => {
+        location.reload();
+      });
     }
     
   }

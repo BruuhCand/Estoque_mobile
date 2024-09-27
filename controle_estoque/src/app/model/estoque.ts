@@ -1,12 +1,10 @@
 import { Produto } from "./produto";
 
-export class Estoque {
+export interface Estoque {
 
-    public id?: number;
-    public nome: string;
-    public produtos?: Produto[];
+    id?: number;
+    nome: string;
+    produtos?: Produto[];
 
-    public constructor(nome: string){
-        this.nome = nome;
-    }
+  
 }

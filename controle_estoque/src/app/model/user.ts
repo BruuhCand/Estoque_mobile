@@ -1,6 +1,6 @@
-export class User {
-    public nome?: string;
-    public email?: string;
-    public senha?: string;
-    public role? : string;
+export interface User {
+    nome?: string;
+    email: string;
+    senha: string;
+    role? : string;
 }
