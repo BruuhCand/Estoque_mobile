@@ -57,6 +57,28 @@ export class EstoqueDetailPage implements OnInit {
     this.titulo = this.titulo + nome ;
   }
 
+  update(estoqueNew: Estoque){
+    console.log(estoqueNew)
+    if(this.id != -1 && !isNaN(this.id)){
+      this.estoqueService.update(estoqueNew, this.id).subscribe({
+        next: (value) => {   
+        this.mostrarToast()
+        
+        //usar pra reload sempre
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      
+        },
+        error: (err) => {
+          console.log(err)
+        }
+      })
+
+    }
+    
+  }
+
   //delete
   public alertButtons = [
     {
@@ -95,28 +117,6 @@ export class EstoqueDetailPage implements OnInit {
     },
    
   ];
-
-  update(estoqueNew: Estoque){
-    console.log(estoqueNew)
-    if(this.id != -1 && !isNaN(this.id)){
-      this.estoqueService.update(estoqueNew, this.id).subscribe({
-        next: (value) => {   
-        this.mostrarToast()
-        
-        //usar pra reload sempre
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000);
-      
-        },
-        error: (err) => {
-          console.log(err)
-        }
-      })
-
-    }
-    
-  }
 
    async mostrarToast() {
     const toast = await this.toastController.create({
