@@ -4,8 +4,8 @@
   </ion-buttons>
   <ion-title>{{titulo}}</ion-title>
   <div slot="end">
-    <ion-icon class="icon-header" name="create"></ion-icon>
-    <ion-icon class="icon-header" name="trash"></ion-icon>
+    <ion-icon class="icon-header" name="create" (click)="editEstoque()"></ion-icon>
+    <ion-icon class="icon-header" name="trash" (click)="deleteEstoque()"></ion-icon>
   </div>
 
 </ion-toolbar>

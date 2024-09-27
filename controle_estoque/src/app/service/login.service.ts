@@ -12,13 +12,15 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  // Método de login que envia o email e a senha para a API
+  
   login(user: User): Observable<any> {
-    return this.http.post<{ token: string }>(`${API_CONFIG.baseUrl}/Login`, user)
+    console.log(user)
+    return this.http.post<{data:{ token: string }}>(`${API_CONFIG.baseUrl}/Login`, user)
       .pipe(
         tap(response => {
           // Armazena o token no localStorage
-          this.setToken(response.token);
+          this.setToken(response.data.token);
+          console.log(response)
         }),
         catchError(error => {
           console.error('Erro de login:', error);
@@ -29,7 +31,7 @@ export class LoginService {
 
   createUser(user: User): Observable<any> {
     console.log(user)
-    return this.http.post<{ token: string }>(`${API_CONFIG.baseUrl}/Usuario`, user)
+    return this.http.post<any>(`${API_CONFIG.baseUrl}/Usuario`, user)
   }
 
   // Método para armazenar o token no localStorage

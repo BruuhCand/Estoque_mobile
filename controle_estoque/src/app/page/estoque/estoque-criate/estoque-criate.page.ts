@@ -4,6 +4,9 @@ import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import { IonicModule } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import { home, homeOutline, list, listOutline, sadOutline, settings, settingsOutline } from 'ionicons/icons';
+import { EstoqueService } from 'src/app/service/estoque.service';
+import { Router } from '@angular/router';
+import { Estoque } from 'src/app/model/estoque';
 
 @Component({
   selector: 'app-estoque-criate',
@@ -15,17 +18,39 @@ import { home, homeOutline, list, listOutline, sadOutline, settings, settingsOut
 export class EstoqueCriatePage implements OnInit {
 
   estoqueNomeControl = new FormControl('', [Validators.required]);
-  
-  constructor() {
+
+  constructor(private estoqueService: EstoqueService, private router: Router) {
     addIcons({sadOutline, homeOutline, listOutline, settingsOutline, home, list, settings })
    }
 
   ngOnInit() {
+
+    
   }
 
   onSubmit(){
 
-    var valor = this.estoqueNomeControl.value;
+    let valor: Estoque = {
+      nome: this.estoqueNomeControl.value as string
+    } 
+
+    if(valor.nome != null){
+      this.estoqueService.create(valor).subscribe({
+        next: (response) => {
+          console.log(response)
+         this.router.navigate([`/estoques`]).then(() => {
+          location.reload();
+        });
+        },
+        error: (err) => {
+          console.error('Erro ao fazer login:', err);
+          
+          this.estoqueNomeControl.reset(); 
+        }
+      })
+    }
+    
   }
+
 
 }

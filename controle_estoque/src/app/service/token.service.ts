@@ -7,7 +7,7 @@
  
 
     // Obtém o token do localStorage
-    const token = localStorage.getItem('authToken'); // Substitua pela lógica de obtenção do token
+    const token = localStorage.getItem('token'); // Substitua pela lógica de obtenção do token
     if (token) {
       // Clona a requisição e adiciona o cabeçalho de autorização
       req = req.clone({
