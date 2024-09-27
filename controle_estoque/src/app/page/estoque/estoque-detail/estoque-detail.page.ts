@@ -1,12 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ToastController } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import { add, create, home, homeOutline, list, listOutline, remove, sadOutline, settings, settingsOutline, trash } from 'ionicons/icons';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Estoque } from 'src/app/model/estoque';
 import { EstoqueService } from 'src/app/service/estoque.service';
+import { ToastComponent } from 'src/app/component/toast/toast.component';
 
 @Component({
   selector: 'app-estoque-detail',
@@ -25,7 +26,7 @@ export class EstoqueDetailPage implements OnInit {
   estoqueAtual: Estoque = {
     nome: ''
   };
-  constructor(private estoqueService: EstoqueService, private router: Router, private toastController: AbortController) { 
+  constructor(private estoqueService: EstoqueService, private router: Router, private toastController: ToastController) { 
     addIcons({sadOutline, add, homeOutline, listOutline, settingsOutline, home, list, settings, remove, trash, create})
 
   }
@@ -81,8 +82,7 @@ export class EstoqueDetailPage implements OnInit {
       let estoqueUpdate: Estoque = {
         nome: data.estoqueNome
       }
-
-
+      this.update(estoqueUpdate)
     }
 
   }];
@@ -97,20 +97,37 @@ export class EstoqueDetailPage implements OnInit {
   ];
 
   update(estoqueNew: Estoque){
-
+    console.log(estoqueNew)
     if(this.id != -1 && !isNaN(this.id)){
       this.estoqueService.update(estoqueNew, this.id).subscribe({
-        next: (value) => {
+        next: (value) => {   
+        this.mostrarToast()
+        
+        //usar pra reload sempre
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      
         },
         error: (err) => {
           console.log(err)
         }
       })
+
     }
     
   }
 
-  
+   async mostrarToast() {
+    const toast = await this.toastController.create({
+      message: 'Estoque Alterado com sucesso',
+      duration: 2000,
+      position: 'top',
+    });
+    await toast.present();
+  }
+
+
 
   
 

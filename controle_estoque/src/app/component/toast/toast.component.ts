@@ -7,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToastComponent  implements OnInit {
 
-  constructor() { }
+  constructor(private toastController: AbortController) {}
 
-  ngOnInit() {}
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
 
+ 
 }
