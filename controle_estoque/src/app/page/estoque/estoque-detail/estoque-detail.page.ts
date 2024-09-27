@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import { add, create, home, homeOutline, list, listOutline, remove, sadOutline, settings, settingsOutline, trash } from 'ionicons/icons';
@@ -13,26 +13,28 @@ import { EstoqueService } from 'src/app/service/estoque.service';
   templateUrl: './estoque-detail.page.html',
   styleUrls: ['./estoque-detail.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, RouterModule]
+  imports: [IonicModule, CommonModule, FormsModule, RouterModule, ReactiveFormsModule]
 })
 export class EstoqueDetailPage implements OnInit {
 
+  estoqueNomeControl = new FormControl('', [Validators.required]);
+
   titulo: string = "Estoque ";
   private activatedRoute = inject(ActivatedRoute);
-  
+  id: number = -1
   estoqueAtual: Estoque = {
     nome: ''
   };
-  constructor(private estoqueService: EstoqueService, private router: Router) { 
+  constructor(private estoqueService: EstoqueService, private router: Router, private toastController: AbortController) { 
     addIcons({sadOutline, add, homeOutline, listOutline, settingsOutline, home, list, settings, remove, trash, create})
 
   }
 
   ngOnInit() {
-   const id = Number(this.activatedRoute.snapshot.paramMap.get('id'))
+   this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'))
     
-    if(!isNaN(id)){
-      this.estoqueService.getById(id).subscribe({
+    if(!isNaN(this.id)){
+      this.estoqueService.getById(this.id).subscribe({
         next: (value) => {
           this.estoqueAtual = value
           this.reloadTitle(value.nome)
@@ -54,13 +56,61 @@ export class EstoqueDetailPage implements OnInit {
     this.titulo = this.titulo + nome ;
   }
 
-  editEstoque(){
+  //delete
+  public alertButtons = [
+    {
+      text: 'Cancel',
+      role: 'cancel',
+      handler: () => {
+        console.log('Alert canceled');
+      },
+    },
+    {
+      text: 'OK',
+      role: 'confirm',
+      handler: () => {
+        //excluir estoque
+      },
+    },
+  ];
 
-  }
+  //update
+  public okButtons = [ {
+    text:'OK',
+    handler: (data: any) =>{
+      let estoqueUpdate: Estoque = {
+        nome: data.estoqueNome
+      }
 
-  deleteEstoque(){
+
+    }
+
+  }];
+  public alertInputs = [
+    {
+      type: 'textarea',
+      placeholder: 'Name',
+      min: 1,
+      name: 'estoqueNome'
+    },
+   
+  ];
+
+  update(estoqueNew: Estoque){
+
+    if(this.id != -1 && !isNaN(this.id)){
+      this.estoqueService.update(estoqueNew, this.id).subscribe({
+        next: (value) => {
+        },
+        error: (err) => {
+          console.log(err)
+        }
+      })
+    }
     
   }
+
+  
 
   
 

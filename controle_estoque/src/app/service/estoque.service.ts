@@ -45,4 +45,17 @@ export class EstoqueService {
       })
     );
   }
+
+  update(estoque: Estoque, id: number): Observable<any> {
+    return this.http.put<{title: string}>(`${API_CONFIG.baseUrl}/Estoque/${id}`, estoque)
+      .pipe(
+        tap(response => {
+          return response.title
+        }),
+        catchError(error => {
+          console.error('Erro de login:', error);
+          return throwError(() => new Error('Falha ao criar estoque'));
+        })
+      );
+  }
 }
