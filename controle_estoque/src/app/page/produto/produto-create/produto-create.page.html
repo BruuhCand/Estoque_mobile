@@ -14,8 +14,8 @@
       <ion-item class="custom-item">
         <ion-select placeholder="Selecione um estoque" label-placement="floating" fill="outline" formControlName="estoqueId">
           <div slot="label">Estoque</div>
-          <ion-select-option *ngFor="let categoria of categorias" [value]="categoria.id">
-            {{ categoria.nome }}
+          <ion-select-option *ngFor="let estoque of estoques" [value]="estoque.id">
+            {{ estoque.nome }}
           </ion-select-option>
         </ion-select>
       </ion-item>
@@ -52,9 +52,10 @@
         <ion-checkbox (click)="modal.present()">Não encontrei a categoria</ion-checkbox>
       </ion-item>
 
-      <ion-item class="custom-item">
-        <ion-datetime presentation="date" [preferWheel]="true" formControlName=""></ion-datetime>
-      </ion-item>
+      <ion-item >
+        <ion-label position="floating" >Validade</ion-label>
+        <ion-datetime class="custom-datetime"  presentation="date" formControlName="validade"></ion-datetime>   
+     </ion-item>
 
       <ion-item class="custom-item">
         <ion-input label="Valor pago" label-placement="floating" fill="outline" type="number" placeholder="000" formControlName="valor"></ion-input>
@@ -99,7 +100,7 @@
   ></ion-toast>
   <ion-alert
   trigger="present-alert"
-  header="Produto salvo com sucesso!! Deseja adicionar um novo produto ao estoque?"
+  header="{{messageAlert}}"
   [buttons]="alertButtons"
 ></ion-alert>
 </ion-content>

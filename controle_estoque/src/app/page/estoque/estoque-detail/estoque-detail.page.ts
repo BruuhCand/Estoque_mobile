@@ -64,7 +64,6 @@ export class EstoqueDetailPage implements OnInit {
         next: (value) => {   
         this.mostrarToast()
         
-        //usar pra reload sempre
         setTimeout(() => {
           window.location.reload();
         }, 2000);

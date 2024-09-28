@@ -33,7 +33,7 @@ export interface ProdutoDTO{
     categoriaNome: string;
     categoria?: Categoria;
     valor: number;
-    validade: Validade[];
+    validades: Validade[];
     estoqueId: number;
     estoque?: Estoque;
 }

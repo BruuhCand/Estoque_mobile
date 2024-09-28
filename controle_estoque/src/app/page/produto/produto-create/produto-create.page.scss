@@ -41,7 +41,7 @@ ion-list{
 }
 
 .custom-item {
-    margin: 5% 10%; /* Espaçamento entre os itens */
+    margin: 5% 5%; /* Espaçamento entre os itens */
    
 }
 
@@ -49,3 +49,9 @@ ion-list{
     width: 20px;
     height: 20px;
 }
+
+.custom-datetime {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  

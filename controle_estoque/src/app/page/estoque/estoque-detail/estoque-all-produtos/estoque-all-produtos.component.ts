@@ -3,7 +3,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { ListUtilComponent } from 'src/app/component/list-util/list-util.component';
-import { Produto } from 'src/app/model/produto';
+import { Produto, ProdutoDTO } from 'src/app/model/produto';
 import { ProdutoService } from 'src/app/service/produto.service';
 
 @Component({
@@ -16,7 +16,7 @@ import { ProdutoService } from 'src/app/service/produto.service';
 export class EstoqueAllProdutosComponent  implements OnInit {
 
   private activatedRoute = inject(ActivatedRoute);
-  produtos: any[] = []
+  produtos: ProdutoDTO[] = []
   listar: any[] = []
   atributos: string[] = ["nome", "qntEstoque", "valor"]
   pagina: string = "produto"
@@ -44,6 +44,19 @@ export class EstoqueAllProdutosComponent  implements OnInit {
         next: (response) => {
           this.produtos = response
           console.log("deuu bomm")
+          console.log(this.produtos)
+          if(this.produtos.length > 0){
+            this.produtos.forEach(x => {
+              var y = {
+                id: x.id,
+                nome: x.nome,
+                qntEstoque: x.quantidadeTotal,
+                valor: "R$ " + x.valor,
+              }
+              this.listar.push(y)
+          })      
+          }
+          
         },
         error: (err) => {
           console.log(err)
@@ -51,16 +64,7 @@ export class EstoqueAllProdutosComponent  implements OnInit {
        })
     }
     
-     console.log(this.produtos)
-    this.produtos.forEach(x => {
-      var y = {
-        id: x.id,
-        nome: x.nome,
-        qntEstoque: x.quantidadeTotal,
-        valor: "R$ " + x.valor,
-      }
-      this.listar.push(y)
-    })
+    
   }
 
 }

@@ -60,4 +60,14 @@ export class ProdutoService {
         })
       );
   }
+
+  getByCodBarras(codigo: number): Observable<ProdutoDTO>{
+    return this.http.get<{data: ProdutoDTO}>(`${API_CONFIG.baseUrl}/Produto/CodBarras/${codigo}`)
+    .pipe(
+      map(response => response.data),
+      catchError(error => {
+        return throwError(() => new Error('Falha ao obter produto'));
+      })
+    );
+  }
 }

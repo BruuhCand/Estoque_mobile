@@ -7,6 +7,10 @@ import { addIcons } from 'ionicons';
 import { Categoria } from 'src/app/model/categoria';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ProdutoService } from 'src/app/service/produto.service';
+import { LoginService } from 'src/app/service/login.service';
+import { EstoqueService } from 'src/app/service/estoque.service';
+import { Produto, ProdutoDTO } from 'src/app/model/produto';
 @Component({
   selector: 'app-produto-create',
   templateUrl: './produto-create.page.html',
@@ -27,12 +31,12 @@ export class ProdutoCreatePage implements OnInit {
   isToastOpen = false;
   mensagemToast: string = "Produto não encontrado"
   dadosRecebidos: any
-
-  categorias: Categoria[] = [
-    {id: 1, nome: "Camiseta" },
-    {id: 2, nome: "Cachecol"}
-  ]
-  constructor(private router: Router) {
+  messageAlert: string = "Produto salvo com sucesso!! Deseja adicionar um novo produto ao estoque?"
+  buttons: string = "alertButtons"
+  categorias: Categoria[] = [{id: 1, nome: "vermelho"}]
+  estoques: any[] = []
+  alertButtons: any[] = []
+  constructor(private router: Router, private produtoService: ProdutoService, private  estoqueService: EstoqueService) {
 
     addIcons({sadOutline, add, homeOutline, listOutline, settingsOutline, home, list, settings, trash })
 
@@ -51,32 +55,69 @@ export class ProdutoCreatePage implements OnInit {
    }
 
   ngOnInit() {
-    if(this.activatedRoute.snapshot.paramMap.get('id') as string !== "create"){
-      this.isEdit = true;
+
+    const id = this.activatedRoute.snapshot.paramMap.get('id') as string 
+     
+      if (id && id !== "create") {
+        this.isEdit = true;
       this.formularioProduto.get('estoqueId')?.disable();
       this.formularioProduto.get('codigoBarras')?.disable();
       this.formularioProduto.get('qntEstoque')?.disable();
+      this.formularioProduto.get('validade')?.disable();
+      this.messageAlert = "Produto alterado com sucesso!!"
+      this.loadDataForEditing(Number(id));
+      } else {
+        this.envioEstoque()
+        this.formularioProduto.get('estoqueId')?.enable();
+        this.formularioProduto.get('codigoBarras')?.enable();
+        this.formularioProduto.get('qntEstoque')?.enable();
+        this.formularioProduto.get('validade')?.enable();
+      }
 
-      this.loadDataForEditing();
-    }
-    else{
-      console.log("url")
-      this.valoresUrl()
-    }
-
+    this.carregaListas();
+    this.buttonsAlert(this.isEdit)
   }
 
-    valoresUrl(){
+    envioEstoque(){
+
       const navigation = this.router.getCurrentNavigation();
       if (navigation  && navigation.extras.state !== undefined ) {
         this.dadosRecebidos = navigation.extras.state['estoqueId'];
-        this.formularioProduto.get('estoqueId')?.setValue(this.dadosRecebidos);
+        this.formularioProduto.get('estoqueId')?.setValue(Number(this.dadosRecebidos));
+        console.log(this.dadosRecebidos)
       }
-        //ver pq n esta mostrando no front corretamente
     }
 
   onSubmit() {
-    console.log(this.formularioProduto.value); // Retorna {nome: ..., preco: ...}
+
+    if(this.isEdit){
+
+    }
+    else{
+
+      var produto: Produto = {
+        nome: this.formularioProduto.get('nome')?.value,
+        codigoBarras: this.formularioProduto.get('codigoBarras')?.value.toString(),
+        quantidade: this.formularioProduto.get('qntEstoque')?.value,
+        quantidadeMinima: this.formularioProduto.get('qntMinima')?.value,
+        categoriaId: Number(this.formularioProduto.get('categoriaId')?.value),
+        estoqueId: Number(this.formularioProduto.get('estoqueId')?.value),
+        validade: new Date(this.formularioProduto.get('validade')?.value),
+        valor: this.formularioProduto.get('valor')?.value
+      }
+
+      console.log(produto)
+
+      this.produtoService.create(produto).subscribe({
+        next(value) {
+          console.log(value)
+        },
+        error(err) {
+          console.error(err)
+        },
+      })
+    }
+    
   }
 
 
@@ -99,51 +140,97 @@ export class ProdutoCreatePage implements OnInit {
     }
   }
 
-  loadDataForEditing() {
-    this.formularioProduto.patchValue({
-      estoqueId: 1,
-      nome: "Produto de exemplo",
-      codigoBarras: 123456789,
-      qntEstoque: 10,
-      qntMinima: 5,
-      categoriaId: 1,
-      ativo: 1,
-      valor: 100
-    });
+  loadDataForEditing(id: number) {
+
+    this.produtoService.getById(id).subscribe({
+      next: (value: ProdutoDTO) =>{
+        this.formularioProduto.patchValue({
+          estoqueId: value.estoqueId,
+          nome: value.nome,
+          codigoBarras: value.codigoBarras,
+          qntEstoque: value.quantidadeTotal,
+          qntMinima: value.quantidadeMinima,
+          categoriaId: 1,
+          validade: value.validades[0].dataValidade,
+          valor: value.valor
+        });
+      },
+      error: (err) =>{
+        console.log(err)
+      }
+    })
+    
   }
 
   procuraItem(item: any, isOpen: any){
+    const cod = Number(item)
+    this.produtoService.getByCodBarras(cod).subscribe({
+      next: (value: ProdutoDTO) =>{
+        console.log("entrou no procura")
+        this.formularioProduto.patchValue({
+          estoqueId: value.estoqueId,
+          nome: value.nome,
+          codigoBarras: value.codigoBarras,
+          qntEstoque: value.quantidadeTotal,
+          qntMinima: value.quantidadeMinima,
+          categoriaId: 1,
+          validade: value.validades[0].dataValidade,
+          valor: value.valor
+        });
+        this.mensagemToast = "Produto encontrado com sucesso"
+
+      },
+      error: (err) =>{
+        console.log(err)
+      }})
     
-    if(item === 123456789){
-      this.formularioProduto.patchValue({
-        estoqueId: 1,
-        nome: "Produto de exemplo",
-        codigoBarras: 123456789,
-        qntEstoque: 10,
-        qntMinima: 5,
-        categoriaId: 1,
-        ativo: 1,
-        valor: 100
-      });
-      this.mensagemToast = "Produto encontrado com sucesso"
-    }
+    
     this.isToastOpen = isOpen;
   }
 
-  public alertButtons = [
-    {
-      text: 'NÃO',
-      handler: () => {
-        var idEstoque = this.formularioProduto.get('estoqueId')?.value
-        this.router.navigate([`/estoque`, idEstoque])
+
+  buttonsAlert(edit: boolean){
+    if(edit){
+      this.alertButtons = [
+        {
+          text: 'OK',
+          handler: () => {
+            var idEstoque = this.formularioProduto.get('estoqueId')?.value
+            console.log(idEstoque)
+            this.router.navigate([`/estoque`, idEstoque, `produtos`])
+          },
+        }
+      ];
+    }else{
+      this.alertButtons = [
+        {
+          text: 'NÃO',
+          handler: () => {
+            var idEstoque = this.formularioProduto.get('estoqueId')?.value
+            this.router.navigate([`/estoque`, idEstoque])
+          },
+        },
+        {
+          text: 'SIM',
+          handler: () => {
+            this.formularioProduto.reset(); 
+          },
+        },
+      ];
+    }
+  }
+  
+
+  carregaListas(){
+
+    this.estoqueService.getAll().subscribe({
+      next: (response) => {
+        this.estoques = response
       },
-    },
-    {
-      text: 'SIM',
-      handler: () => {
-        this.formularioProduto.reset(); 
-      },
-    },
-  ];
+      error: (err) => {
+        console.log(err)
+      }
+     })
+  }
 
 }
