@@ -2,15 +2,16 @@ import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { add, home, homeOutline, list, listOutline, sadOutline, settings, settingsOutline, trash } from 'ionicons/icons';
-import { IonicModule, IonModal } from '@ionic/angular';
+import { IonicModule, IonModal, IonAlert} from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import { Categoria } from 'src/app/model/categoria';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { ProdutoService } from 'src/app/service/produto.service';
-import { LoginService } from 'src/app/service/login.service';
 import { EstoqueService } from 'src/app/service/estoque.service';
 import { Produto, ProdutoDTO } from 'src/app/model/produto';
+import { CategoriaService } from 'src/app/service/categoria.service';
+import { Estoque } from 'src/app/model/estoque';
 @Component({
   selector: 'app-produto-create',
   templateUrl: './produto-create.page.html',
@@ -19,7 +20,7 @@ import { Produto, ProdutoDTO } from 'src/app/model/produto';
   imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule]
 })
 export class ProdutoCreatePage implements OnInit {
-
+  @ViewChild('presentAlert') alert!: IonAlert;
   @ViewChild(IonModal) modal!: IonModal;
   private activatedRoute = inject(ActivatedRoute);
   
@@ -33,10 +34,11 @@ export class ProdutoCreatePage implements OnInit {
   dadosRecebidos: any
   messageAlert: string = "Produto salvo com sucesso!! Deseja adicionar um novo produto ao estoque?"
   buttons: string = "alertButtons"
-  categorias: Categoria[] = [{id: 1, nome: "vermelho"}]
-  estoques: any[] = []
+  categorias: Categoria[] = []
+  estoques: Estoque[] = []
   alertButtons: any[] = []
-  constructor(private router: Router, private produtoService: ProdutoService, private  estoqueService: EstoqueService) {
+  constructor(private router: Router, private produtoService: ProdutoService, private  estoqueService: EstoqueService,
+    private categoriaService: CategoriaService) {
 
     addIcons({sadOutline, add, homeOutline, listOutline, settingsOutline, home, list, settings, trash })
 
@@ -48,7 +50,7 @@ export class ProdutoCreatePage implements OnInit {
       qntEstoque: new FormControl('', [Validators.required]),
       qntMinima: new FormControl('', [Validators.required]),
       categoriaId: new FormControl('', [Validators.required]),
-      validade: new FormControl(new Date(), [Validators.required, ]),
+      validade: new FormControl('', [Validators.required, ]),
       valor: new FormControl('', [Validators.required, Validators.min(1)])
 
     });
@@ -102,43 +104,26 @@ export class ProdutoCreatePage implements OnInit {
         quantidadeMinima: this.formularioProduto.get('qntMinima')?.value,
         categoriaId: Number(this.formularioProduto.get('categoriaId')?.value),
         estoqueId: Number(this.formularioProduto.get('estoqueId')?.value),
-        validade: this.formularioProduto.get('validade')?.value,
+        dataValidade: new Date(this.formularioProduto.get('validade')?.value).toISOString().split('T')[0],
         valor: this.formularioProduto.get('valor')?.value
       }
 
       console.log(produto)
 
       this.produtoService.create(produto).subscribe({
-        next(value) {
+        next: (value) => {
           console.log(value)
+          
         },
-        error(err) {
+        error: (err) => {
           console.error(err)
-        },
+          this.messageAlert = "Erro ao inserir produto no estoque, deseja cadastrar novamente?"
+        }
       })
     }
     
   }
 
-
-  cancel() {
-    this.modal.dismiss(null, 'cancel');
-  }
-
-  confirm() {
-    this.modal.dismiss(this.nameCategoria, 'confirm');
-  }
-
-  onWillDismiss(event: Event) {
-    const ev = event as CustomEvent<OverlayEventDetail<string>>;
-    if (ev.detail.role === 'confirm' && ev.detail.data) {
-      const newCategoria: Categoria = {
-        id: this.categorias.length + 1, // Exemplo: gerando um ID único
-        nome: ev.detail.data
-      };
-      this.categorias.push(newCategoria);
-    }
-  }
 
   loadDataForEditing(id: number) {
 
@@ -188,6 +173,67 @@ export class ProdutoCreatePage implements OnInit {
     this.isToastOpen = isOpen;
   }
 
+  carregaListas(){
+
+    this.estoqueService.getAll().subscribe({
+      next: (response) => {
+        this.estoques = response
+      },
+      error: (err) => {
+        console.log(err)
+      }
+     })
+
+     this.categoriaService.getAll().subscribe({
+      next: (response) => {
+        this.categorias = response
+      },
+      error: (err) => {
+        console.log(err)
+      }
+     })
+  }
+
+  setaCategoria(nomeCateg: string){
+    var categEscolhida = this.categorias.find(x => x.nome == nomeCateg)
+    this.formularioProduto.get('categoriaId')?.setValue(categEscolhida?.id)
+  }
+
+  //pop-up e modais
+  cancel() {
+    this.modal.dismiss(null, 'cancel');
+  }
+
+  confirm() {
+    this.modal.dismiss(this.nameCategoria, 'confirm');
+
+    const categ: Categoria = {
+      nome: this.nameCategoria
+    }
+    if(categ != null && categ != undefined){
+      this.categoriaService.create(categ).subscribe({
+        next: (response) => {
+          console.log(response)
+         this.setaCategoria(categ.nome)
+        },
+        error: (err) => {
+        }
+      })
+
+      this.categoriaNome.reset()
+    }
+  }
+
+  onWillDismiss(event: Event) {
+    const ev = event as CustomEvent<OverlayEventDetail<string>>;
+    if (ev.detail.role === 'confirm' && ev.detail.data) {
+      const newCategoria: Categoria = {
+        id: this.categorias.length + 1, // Exemplo: gerando um ID único
+        nome: ev.detail.data
+      };
+      this.categorias.push(newCategoria);
+    }
+  }
 
   buttonsAlert(edit: boolean){
     if(edit){
@@ -218,19 +264,6 @@ export class ProdutoCreatePage implements OnInit {
         },
       ];
     }
-  }
-  
-
-  carregaListas(){
-
-    this.estoqueService.getAll().subscribe({
-      next: (response) => {
-        this.estoques = response
-      },
-      error: (err) => {
-        console.log(err)
-      }
-     })
   }
 
 }

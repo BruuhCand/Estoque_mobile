@@ -12,7 +12,7 @@ export interface Produto{
     categoriaId: number;
     categoria?: Categoria;
     valor: number;
-    validade: Date;
+    dataValidade: string;
     estoqueId: number;
     estoque?: Estoque;
 
