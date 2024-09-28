@@ -102,7 +102,7 @@ export class ProdutoCreatePage implements OnInit {
         quantidadeMinima: this.formularioProduto.get('qntMinima')?.value,
         categoriaId: Number(this.formularioProduto.get('categoriaId')?.value),
         estoqueId: Number(this.formularioProduto.get('estoqueId')?.value),
-        validade: new Date(this.formularioProduto.get('validade')?.value),
+        validade: this.formularioProduto.get('validade')?.value,
         valor: this.formularioProduto.get('valor')?.value
       }
 
