@@ -27,6 +27,7 @@ import {
 })
 export class EstoqueSaidaPage implements OnInit {
   estoqueNomeControl = new FormControl('', [Validators.required]);
+  estoques: any[] = []
 
   constructor() {
     addIcons({

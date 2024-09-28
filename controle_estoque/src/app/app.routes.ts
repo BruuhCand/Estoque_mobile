@@ -39,6 +39,14 @@ export const routes: Routes = [
   {
     path: 'register-user',
     loadComponent: () => import('./page/login/register-user/register-user.page').then( m => m.RegisterUserPage)
+  },
+  {
+    path: 'controle-produtos',
+    loadComponent: () => import('./page/estoque/entrada-saida/estoque-saida.page').then(m => m.EstoqueSaidaPage)
+  },
+  {
+    path: 'produto/create',
+    loadComponent: () => import('./page/produto/produto-create/produto-create.page').then( m => m.ProdutoCreatePage)
   }
 
 ];

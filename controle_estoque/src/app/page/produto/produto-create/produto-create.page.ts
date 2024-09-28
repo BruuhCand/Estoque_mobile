@@ -44,7 +44,7 @@ export class ProdutoCreatePage implements OnInit {
       qntEstoque: new FormControl('', [Validators.required]),
       qntMinima: new FormControl('', [Validators.required]),
       categoriaId: new FormControl('', [Validators.required]),
-      ativo: new FormControl(1),
+      validade: new FormControl(new Date(), [Validators.required, ]),
       valor: new FormControl('', [Validators.required, Validators.min(1)])
 
     });
@@ -63,10 +63,6 @@ export class ProdutoCreatePage implements OnInit {
       console.log("url")
       this.valoresUrl()
     }
-
-    this.formularioProduto.get('ativo')?.valueChanges.subscribe(value => {
-      this.formularioProduto.get('ativo')?.setValue(value ? 1 : 0, { emitEvent: false });
-    });
 
   }
 

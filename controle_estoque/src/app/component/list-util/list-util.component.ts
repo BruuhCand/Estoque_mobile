@@ -21,26 +21,28 @@ export class ListUtilComponent  implements OnInit {
     console.log(this.dadosList)
   }
 
-  navegar(objeto: any){
-    console.log("entrou aqui")
-
-    var construUrl = this.entity
-
-    if(objeto.id){
-      construUrl += "/" + objeto.id;
+  navegar(objeto: any) {
+    console.log("entrou aqui");
+  
+    let construUrl = this.entity;
+  
+    if (objeto.id) {
+      construUrl += `/${objeto.id}`;
     }
-
-    if(objeto.url){
-      construUrl += "/" + objeto.url
+  
+    if (objeto.url) {
+      construUrl += `/${objeto.url}`;
     }
-
-    if (construUrl != this.entity){
-
+  
+    // Verifica se algo foi adicionado à URL antes de navegar
+    if (construUrl !== this.entity) {
       this.router.navigate([`/${construUrl}`]).then(() => {
-        location.reload();
+        
       });
+      
+    } else {
+      console.log("Nenhuma navegação realizada.");
     }
-    
   }
 
 }

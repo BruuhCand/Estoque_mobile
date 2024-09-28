@@ -17,7 +17,7 @@ import { mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, heartOutlin
 export class AppComponent {
   public appPages = [
     { title: 'Estoques', url: '/estoques', icon: 'home' },
-    { title: 'Controle produto', url: '', icon: 'cube' },
+    { title: 'Controle produto', url: '/controle-produtos ', icon: 'cube' },
     { title: 'Histórico', url: '', icon: 'analytics' },
     { title: 'Configurações', url: '', icon: 'settings' },
   ];

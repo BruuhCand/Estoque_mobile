@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Produto, ProdutoDTO } from '../model/produto';
 import { catchError, map, Observable, tap, throwError } from 'rxjs';
@@ -24,9 +24,12 @@ export class ProdutoService {
       );
   }
 
-  //ta errado
+  
   getAll(id: number): Observable<ProdutoDTO[]> {
-    return this.http.get<{ data: ProdutoDTO[] }>(`${API_CONFIG.baseUrl}/Produto/${id}`)
+
+    let params = new HttpParams().set('estoqueId', id.toString());
+    
+    return this.http.get<{ data: ProdutoDTO[] }>(`${API_CONFIG.baseUrl}/Produto`, {params})
       .pipe(
         map((response: { data: any; }) => response.data), 
         catchError(error => {
