@@ -64,25 +64,30 @@ export const routes: Routes = [
   },
 
   {
-    path: 'controle-produto',
+    path: 'controle-produtos',
     loadComponent: () =>
       import('./page/produto/controle-produto/controle-produto.page').then(
         (m) => m.ControleProdutoPage
       ),
   },
   {
-    path: 'all-produtos',
+    path: 'venda/:id',
     loadComponent: () =>
       import('./page/venda/all-produtos/all-produtos.page').then(
         (m) => m.AllProdutosPage
       ),
-  },  {
-    path: 'validade-produto',
-    loadComponent: () => import('./page/venda/validade-produto/validade-produto.page').then( m => m.ValidadeProdutoPage)
+      children: [
+          {
+            path: 'validade',
+            loadComponent: () => import('./page/venda/validade-produto/validade-produto.page').then( m => m.ValidadeProdutoPage)
+          },
+          {
+            path: 'detail',
+            loadComponent: () => import('./page/venda/venda-detail/venda-detail.page').then( m => m.VendaDetailPage)
+          },
+        
+      ]
   },
-  {
-    path: 'venda-detail',
-    loadComponent: () => import('./page/venda/venda-detail/venda-detail.page').then( m => m.VendaDetailPage)
-  },
+  
 
 ];

@@ -70,6 +70,7 @@ export class ControleProdutoPage implements OnInit {
           state: { estoqueId: Number(estoque) },
         });
       } else {
+        this.router.navigate([`/venda`, estoque]);
       }
     }
   }
