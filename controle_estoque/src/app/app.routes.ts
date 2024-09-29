@@ -41,8 +41,16 @@ export const routes: Routes = [
     loadComponent: () => import('./page/login/register-user/register-user.page').then( m => m.RegisterUserPage)
   },
   {
-    path: 'controle-produtos',
-    loadComponent: () => import('./page/estoque/entrada-saida/estoque-saida.page').then(m => m.EstoqueSaidaPage)
+    path: 'saidas',
+    loadComponent: () => import('./page/saida/saida-inicio/saida-inicio.page').then( m => m.SaidaInicioPage)
+  },
+  {
+    path: 'saida/:id',
+    loadComponent: () => import('./page/saida/all-produtos/all-produtos.page').then( m => m.AllProdutosPage),
+    children:[]
+  
   }
+
+
 
 ];

@@ -1,0 +1,37 @@
+<ion-toolbar class="header">
+  <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title>Saida do estoque</ion-title>
+</ion-toolbar>
+
+<ion-content [fullscreen]="true">
+  <div id="container">
+    <form (ngSubmit)="onSubmit()"> <!-- Formulário com evento submit -->
+      <ion-item>
+        <ion-select placeholder="Selecione um estoque" label-placement="floating" fill="outline" formControlName="estoqueId">
+          <div slot="label">Estoque Saida</div>
+          <ion-select-option *ngFor="let estoque of estoques" [value]="estoque.id">
+            {{ estoque.nome }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+  
+   
+      <ion-button  slot="" type="submit" expand="full" shape="round" [disabled]="!estoqueId.valid">
+        next
+      </ion-button>
+    </form>
+  
+  </div>
+</ion-content>
+
+<ion-toolbar>
+  <ion-grid>
+      <ion-row>
+          <ion-col><ion-icon name="home" class="icon"></ion-icon></ion-col>
+          <ion-col><ion-icon name="list" class="icon"></ion-icon></ion-col>
+          <ion-col><ion-icon name="settings" class="icon"></ion-icon></ion-col>
+      </ion-row>
+  </ion-grid>
+</ion-toolbar>
