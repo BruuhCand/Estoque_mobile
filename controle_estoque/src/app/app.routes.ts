@@ -49,7 +49,11 @@ export const routes: Routes = [
     loadComponent: () => import('./page/saida/all-produtos/all-produtos.page').then( m => m.AllProdutosPage),
     children:[]
   
+  },  {
+    path: 'controle-produto',
+    loadComponent: () => import('./page/produto/controle-produto/controle-produto.page').then( m => m.ControleProdutoPage)
   }
+
 
 
 

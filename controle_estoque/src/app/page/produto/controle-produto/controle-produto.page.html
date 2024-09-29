@@ -1,0 +1,47 @@
+<ion-toolbar class="header">
+  <ion-buttons slot="start">
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title>Ação Estoque</ion-title>
+</ion-toolbar> <!-- Menu -->
+
+<ion-content [fullscreen]="true">
+  <div id="container">
+    <form [formGroup]="formAcao" (ngSubmit)="onSubmit()"> <!-- Formulário com evento submit -->
+      <ion-item>
+        <ion-select placeholder="Selecione um estoque" label-placement="floating" fill="outline"
+          formControlName="estoqueId">
+          <div slot="label">Estoque</div>
+          <ion-select-option *ngFor="let estoque of estoques" [value]="estoque.id">
+            {{ estoque.nome }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item> <!-- selecionar o estoque -->
+
+      <ion-item>
+        <ion-select placeholder="Selecione uma ação" label-placement="floating" fill="outline" formControlName="acaoId">
+          <div slot="label">Ação</div>
+          <ion-select-option *ngFor="let ac of acao" [value]="ac.id">
+            {{ ac.nome }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item> <!-- selecionar a ação entrada ou saída -->
+
+
+      <ion-button slot="" type="submit" expand="full" shape="round" [disabled]="formAcao.invalid">
+        next
+      </ion-button>
+    </form> <!-- botão pra enviar formulário -->
+
+  </div>
+</ion-content>
+
+<ion-toolbar> <!-- rodapé navegação -->
+  <ion-grid>
+    <ion-row>
+      <ion-col><ion-icon name="home" class="icon"></ion-icon></ion-col>
+      <ion-col><ion-icon name="list" class="icon"></ion-icon></ion-col>
+      <ion-col><ion-icon name="settings" class="icon"></ion-icon></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-toolbar>
