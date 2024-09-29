@@ -30,6 +30,9 @@ export class ProdutoCreatePage implements OnInit {
   nameCategoria: string = "";
   isModalOpen: boolean = false;
   isToastOpen = false;
+  isUpdate:any = {
+    update: false
+  }
   mensagemToast: string = "Produto não encontrado"
   dadosRecebidos: any
   messageAlert: string = "Produto salvo com sucesso!! Deseja adicionar um novo produto ao estoque?"
@@ -68,6 +71,9 @@ export class ProdutoCreatePage implements OnInit {
       this.formularioProduto.get('validade')?.disable();
       this.messageAlert = "Produto alterado com sucesso!!"
       this.loadDataForEditing(Number(id));
+      this.isUpdate ={
+        id: Number(id)
+      } 
       } else {
         this.envioEstoque()
         this.formularioProduto.get('estoqueId')?.enable();
@@ -91,22 +97,31 @@ export class ProdutoCreatePage implements OnInit {
     }
 
   onSubmit() {
+    console.log(this.isUpdate)
+    var produto: Produto = {
+      nome: this.formularioProduto.get('nome')?.value,
+      codigoBarras: this.formularioProduto.get('codigoBarras')?.value.toString(),
+      quantidade: this.formularioProduto.get('qntEstoque')?.value,
+      quantidadeMinima: this.formularioProduto.get('qntMinima')?.value,
+      categoriaId: Number(this.formularioProduto.get('categoriaId')?.value),
+      estoqueId: Number(this.formularioProduto.get('estoqueId')?.value),
+      dataValidade: new Date(this.formularioProduto.get('validade')?.value).toISOString().split('T')[0],
+      valor: this.formularioProduto.get('valor')?.value
+    }
 
-    if(this.isEdit){
-
+    if(this.isEdit || this.isUpdate.update){
+      this.produtoService.update(produto, this.isUpdate.id).subscribe({
+        next: (value) => {
+          console.log(value)
+          
+        },
+        error: (err) => {
+          console.error(err)
+          this.messageAlert = err.message
+        }
+      })
     }
     else{
-
-      var produto: Produto = {
-        nome: this.formularioProduto.get('nome')?.value,
-        codigoBarras: this.formularioProduto.get('codigoBarras')?.value.toString(),
-        quantidade: this.formularioProduto.get('qntEstoque')?.value,
-        quantidadeMinima: this.formularioProduto.get('qntMinima')?.value,
-        categoriaId: Number(this.formularioProduto.get('categoriaId')?.value),
-        estoqueId: Number(this.formularioProduto.get('estoqueId')?.value),
-        dataValidade: new Date(this.formularioProduto.get('validade')?.value).toISOString().split('T')[0],
-        valor: this.formularioProduto.get('valor')?.value
-      }
 
       console.log(produto)
 
@@ -117,7 +132,7 @@ export class ProdutoCreatePage implements OnInit {
         },
         error: (err) => {
           console.error(err)
-          this.messageAlert = "Erro ao inserir produto no estoque, deseja cadastrar novamente?"
+          this.messageAlert = err.message + " Deseja adicionar um novo produto?"
         }
       })
     }
@@ -149,17 +164,19 @@ export class ProdutoCreatePage implements OnInit {
 
   procuraItem(item: any, isOpen: any){
     const cod = Number(item)
+    console.log(cod)
     this.produtoService.getByCodBarras(cod).subscribe({
       next: (value: ProdutoDTO) =>{
         console.log("entrou no procura")
+        this.isUpdate.update = true
+        this.isUpdate.id = value.id
         this.formularioProduto.patchValue({
           estoqueId: value.estoqueId,
           nome: value.nome,
           codigoBarras: value.codigoBarras,
-          qntEstoque: value.quantidadeTotal,
           qntMinima: value.quantidadeMinima,
           categoriaId: 1,
-          validade: value.validades[0].dataValidade,
+          validade:'',
           valor: value.valor
         });
         this.mensagemToast = "Produto encontrado com sucesso"

@@ -12,14 +12,19 @@ export class ProdutoService {
   constructor(private http: HttpClient) { }
 
   create(produto: Produto): Observable<any> {
-    return this.http.post<{title: string}>(`${API_CONFIG.baseUrl}/Produto`, produto)
+    return this.http.post<any>(`${API_CONFIG.baseUrl}/Produto`, produto)
       .pipe(
         tap(response => {
-          return response.title
+          return response
         }),
         catchError(error => {
-          console.error('Erro de login:', error);
-          return throwError(() => new Error('Falha ao criar produto'));
+          if (error.error && error.error.message) {
+            // Retorna a mensagem específica do erro
+            return throwError(() => new Error(error.error.message));
+          } else {
+            // Retorna uma mensagem genérica de erro caso a resposta não tenha uma mensagem detalhada
+            return throwError(() => new Error('Falha ao criar produto.'));
+          }
         })
       );
   }
@@ -49,14 +54,14 @@ export class ProdutoService {
   }
 
   update(produto: Produto, id: number): Observable<any> {
-    return this.http.put<{title: string}>(`${API_CONFIG.baseUrl}/Produto/${id}`, produto)
+    return this.http.put<any>(`${API_CONFIG.baseUrl}/Produto/${id}`, produto)
       .pipe(
         tap(response => {
-          return response.title
+          return response
         }),
         catchError(error => {
           console.error('Erro de login:', error);
-          return throwError(() => new Error('Falha ao criar estoque'));
+          return error;
         })
       );
   }
