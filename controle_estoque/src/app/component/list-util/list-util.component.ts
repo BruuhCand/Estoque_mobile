@@ -33,12 +33,17 @@ export class ListUtilComponent  implements OnInit {
     if (objeto.url) {
       construUrl += `/${objeto.url}`;
     }
+
+    if(objeto.segId){
+      construUrl += `/${objeto.segId}`;
+    }
   
     // Verifica se algo foi adicionado à URL antes de navegar
     if (construUrl !== this.entity) {
       this.router.navigate([`/${construUrl}`]).then(() => {
         
       });
+
       
     } else {
       console.log("Nenhuma navegação realizada.");

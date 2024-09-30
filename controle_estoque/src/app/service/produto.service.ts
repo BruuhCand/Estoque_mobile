@@ -75,4 +75,14 @@ export class ProdutoService {
       })
     );
   }
+
+  delete(id: number): Observable<any>{
+    return this.http.delete<any>(`${API_CONFIG.baseUrl}/Produto/${id}`)
+    .pipe(
+      map(response => response.data),
+      catchError(error => {
+        return throwError(() => new Error('Falha ao deletar produto'));
+      })
+    );
+  }
 }

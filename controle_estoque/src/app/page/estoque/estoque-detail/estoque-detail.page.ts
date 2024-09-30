@@ -91,7 +91,19 @@ export class EstoqueDetailPage implements OnInit {
       text: 'OK',
       role: 'confirm',
       handler: () => {
-        //excluir estoque
+        if(this.estoqueAtual.id != undefined){
+          this.estoqueService.delete(this.estoqueAtual.id).subscribe({
+            next: (value) => {
+              this.router.navigate([`/estoques`]).then(() => {
+                location.reload();
+              });
+            },
+            error: (err) => {
+              console.log(err)
+            }
+          })
+        }
+      
       },
     },
   ];

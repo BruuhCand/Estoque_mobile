@@ -1,13 +1,28 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>all-produtos</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-toolbar class="header">
+  <ion-buttons slot="start">
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title>Venda</ion-title>
+  <div slot="end">
+    <ion-icon class="icon-header" name="create" id="edit-alert" ></ion-icon>
+    <ion-icon class="icon-header" name="trash" id="delete-alert"></ion-icon>
+  </div>
+
+</ion-toolbar>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">all-produtos</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="titulo">  
+    <h4>Todos os produtos</h4>
+  </div>
+  <app-list-util [dadosList] = "listar" [atributos] = "atributos" [entity] = "pagina"></app-list-util>
 </ion-content>
+
+<ion-toolbar>
+  <ion-grid>
+    <ion-row>
+      <ion-col><ion-icon name="home" class="icon"></ion-icon></ion-col>
+      <ion-col><ion-icon name="list" class="icon"></ion-icon></ion-col>
+      <ion-col><ion-icon name="settings" class="icon"></ion-icon></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-toolbar>

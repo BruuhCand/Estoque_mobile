@@ -63,6 +63,8 @@ export class ControleProdutoPage implements OnInit {
   onSubmit() {
     var estoque = this.formAcao.get('estoqueId')?.value;
     var acao = this.formAcao.get('acaoId')?.value;
+    console.log(estoque)
+    console.log(acao)
     if (estoque != '' && acao != '') {
       console.log(this.formAcao.value);
       if (acao == 1) {

@@ -40,14 +40,14 @@ export class EstoqueGeralComponent  implements OnInit {
   }
 
   adicionaProd(){
-    console.log("entrou aquiii2")
+   
     this.route.navigate(([`/produto/create`]), {
       state: { estoqueId: this.idPagina},
     });
   }
 
   removeProd(){
-    
+    this.route.navigate([`/venda`, this.idPagina]);
   }
 
 }

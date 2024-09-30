@@ -78,7 +78,7 @@ export const routes: Routes = [
       ),
       children: [
           {
-            path: 'validade',
+            path: 'validade/:idprod',
             loadComponent: () => import('./page/venda/validade-produto/validade-produto.page').then( m => m.ValidadeProdutoPage)
           },
           {

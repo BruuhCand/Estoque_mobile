@@ -40,6 +40,8 @@ export class ProdutoCreatePage implements OnInit {
   categorias: Categoria[] = []
   estoques: Estoque[] = []
   alertButtons: any[] = []
+
+
   constructor(private router: Router, private produtoService: ProdutoService, private  estoqueService: EstoqueService,
     private categoriaService: CategoriaService) {
 
@@ -72,6 +74,7 @@ export class ProdutoCreatePage implements OnInit {
       this.messageAlert = "Produto alterado com sucesso!!"
       this.loadDataForEditing(Number(id));
       this.isUpdate ={
+        update: true,
         id: Number(id)
       } 
       } else {
@@ -143,7 +146,7 @@ export class ProdutoCreatePage implements OnInit {
   loadDataForEditing(id: number) {
 
     this.produtoService.getById(id).subscribe({
-      next: (value: ProdutoDTO) =>{
+      next: (value) =>{
         this.formularioProduto.patchValue({
           estoqueId: value.estoqueId,
           nome: value.nome,
@@ -282,5 +285,37 @@ export class ProdutoCreatePage implements OnInit {
       ];
     }
   }
+
+   //delete
+   public deleteButtons = [
+    {
+      text: 'Cancel',
+      role: 'cancel',
+      handler: () => {
+        console.log('Alert canceled');
+      },
+    },
+    {
+      text: 'OK',
+      role: 'confirm',
+      handler: () => {
+        if(this.isUpdate.id != undefined){
+          this.produtoService.delete(this.isUpdate.id).subscribe({
+            next: (value) => {
+              var idEstoque = this.formularioProduto.get('estoqueId')?.value
+            console.log(idEstoque)
+            //this.router.navigate([`/estoque`, idEstoque, `produtos`]).then(() => {
+             // location.reload();
+           // });
+            },
+            error: (err) => {
+              console.log(err)
+            }
+          })
+        }
+      
+      },
+    },
+  ];
 
 }

@@ -4,7 +4,7 @@
   </ion-buttons>
   <ion-title>Cadastro de produtos</ion-title>
   <div slot="end">
-    <ion-icon class="icon-header" *ngIf="isEdit" name="trash"></ion-icon>
+    <ion-icon class="icon-header" *ngIf="isEdit" name="trash" id="delete-alert"></ion-icon>
   </div>
 </ion-toolbar>
 
@@ -102,6 +102,7 @@
   header="{{messageAlert}}"
   [buttons]="alertButtons"
 ></ion-alert>
+
 </ion-content>
 
 <ion-toolbar>
@@ -113,3 +114,9 @@
     </ion-row>
   </ion-grid>
 </ion-toolbar>
+
+<ion-alert
+  trigger="delete-alert"
+  header="Realmente deseja excluir o produto {{this.formularioProduto.get('nome')?.value}}"
+  [buttons]="deleteButtons"
+></ion-alert>
