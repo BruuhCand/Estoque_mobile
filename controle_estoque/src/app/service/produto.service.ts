@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Produto, ProdutoDTO } from '../model/produto';
+import { Produto, ProdutoDTO, Validade } from '../model/produto';
 import { catchError, map, Observable, tap, throwError } from 'rxjs';
 import { API_CONFIG } from '../const/api.config';
 
@@ -84,5 +84,17 @@ export class ProdutoService {
         return throwError(() => new Error('Falha ao deletar produto'));
       })
     );
+  }
+
+  getValidades(id: number): Observable<Validade[]>{
+    let params = new HttpParams().set('produtoId', id.toString());
+
+    return this.http.get<{ data: Validade[] }>(`${API_CONFIG.baseUrl}/Validade`, {params})
+      .pipe(
+        map((response: { data: any; }) => response.data), 
+        catchError(error => {
+          return throwError(() => new Error('Falha ao obter validades'));
+        })
+      );
   }
 }

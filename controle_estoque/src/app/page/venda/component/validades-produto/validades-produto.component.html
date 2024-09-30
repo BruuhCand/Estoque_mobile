@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Selecionar Quantidades</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="fecharModal()">Cancelar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="form">
+    <ion-list *ngIf="validades.controls.length > 0">
+      <ion-item *ngFor="let validadeForm of validades.controls; let i = index" [formGroupName]="i">
+        <ion-label>
+          Validade: {{ validadeForm.get('validade')?.value }} 
+        </ion-label>
+        <ion-select formControlName="quantidade" interface="popover" placeholder="Selecione a quantidade" (ionChange)="onQuantidadeChange($event, i)">
+          <ion-select-option *ngFor="let num of getQuantidadeOptions(produtosVal[i].quantidade)" [value]="num">
+            {{ num }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>
+
+<ion-footer>
+  <ion-button expand="full" (click)="fecharComOk()">Ok</ion-button>
+</ion-footer>

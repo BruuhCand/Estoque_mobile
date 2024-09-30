@@ -14,7 +14,19 @@
   <div class="titulo">  
     <h4>Todos os produtos</h4>
   </div>
-  <app-list-util [dadosList] = "listar" [atributos] = "atributos" [entity] = "pagina"></app-list-util>
+
+  <div *ngIf="listar.length > 0">
+    <ion-list lines="none">
+      <ion-item *ngFor="let list of listar" class="custom-item" >
+          <div style="flex: 1; display: flex; justify-content: space-between;" (click)="abrirModal(list)">
+              <ion-label>{{ list.nome}}</ion-label>
+              <ion-label>{{ list.qntEstoque}}</ion-label>
+              <ion-label>{{ list.valor}}</ion-label>
+          </div>
+      </ion-item>
+    </ion-list>
+  </div>
+
 </ion-content>
 
 <ion-toolbar>

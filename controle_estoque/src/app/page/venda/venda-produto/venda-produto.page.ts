@@ -1,31 +1,29 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule,  ModalController  } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProdutoDTO } from 'src/app/model/produto';
-import { ProdutoService } from 'src/app/service/produto.service';
 import { addIcons } from 'ionicons';
-import { add, create, home, homeOutline, list, listOutline, remove, sadOutline, settings, settingsOutline, trash } from 'ionicons/icons';
+import { sadOutline, add, homeOutline, listOutline, settingsOutline, home, list, settings, remove, trash, create } from 'ionicons/icons';
+import { ProdutoService } from 'src/app/service/produto.service';
 import { ListUtilComponent } from 'src/app/component/list-util/list-util.component';
+import { ValidadesProdutoComponent } from '../component/validades-produto/validades-produto.component';
 
 @Component({
-  selector: 'app-all-produtos',
-  templateUrl: './all-produtos.page.html',
-  styleUrls: ['./all-produtos.page.scss'],
+  selector: 'app-venda-produto',
+  templateUrl: './venda-produto.page.html',
+  styleUrls: ['./venda-produto.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, ListUtilComponent]
+  imports: [IonicModule, CommonModule, FormsModule, ListUtilComponent, ValidadesProdutoComponent]
 })
-export class AllProdutosPage implements OnInit {
+export class VendaProdutoPage implements OnInit {
 
   private activatedRoute = inject(ActivatedRoute);
   produtos:any[] = []
   listar: any[] = []
-  atributos: string[] = ["nome", "qntEstoque", "valor"]
-  pagina: string = "venda"
   estoqueId: any
   id: any
-  constructor(private router: Router, private produtoService: ProdutoService) { 
+  constructor(private router: Router, private produtoService: ProdutoService, private modalCtrl: ModalController) { 
     addIcons({sadOutline, add, homeOutline, listOutline, settingsOutline, home, list, settings, remove, trash, create})
   }
 
@@ -47,17 +45,13 @@ export class AllProdutosPage implements OnInit {
       this.produtoService.getAll(id).subscribe({
         next: (response) => {
           this.produtos = response
-          console.log("deuu bomm")
-          console.log(this.produtos)
           if(this.produtos.length > 0){
             this.produtos.forEach(x => {
               var y = {
-                id: this.estoqueId,
+                id: x.id,
                 nome: x.nome,
                 qntEstoque: x.quantidadeTotal,
                 valor: "R$ " + x.valor,
-                url: "validade",
-                segId: x.id
               }
               this.listar.push(y)
           })      
@@ -69,8 +63,24 @@ export class AllProdutosPage implements OnInit {
         }
        })
     }
+  }
+
+  async abrirModal(produto: any) {
+    console.log(produto)
+    const modal = await this.modalCtrl.create({
+      component: ValidadesProdutoComponent,
+      componentProps: { produto }
+    });
+
     
-    
+    modal.onDidDismiss().then((data) => {
+      if (data.data) {
+        console.log('Dados retornados:', data.data);
+       
+      }
+    });
+
+    return await modal.present();
   }
 
 }

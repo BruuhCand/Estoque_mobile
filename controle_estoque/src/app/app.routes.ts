@@ -72,19 +72,9 @@ export const routes: Routes = [
   },
   {
     path: 'venda/:id',
-    loadComponent: () =>
-      import('./page/venda/all-produtos/all-produtos.page').then(
-        (m) => m.AllProdutosPage
-      ),     
+    loadComponent: () => import('./page/venda/venda-produto/venda-produto.page').then( m => m.VendaProdutoPage)
   },
-  {
-    path: 'venda/:id/validade/:idprod',
-    loadComponent: () => import('./page/venda/validade-produto/validade-produto.page').then( m => m.ValidadeProdutoPage)
-  },
-  {
-    path: 'venda/:id/detail',
-    loadComponent: () => import('./page/venda/venda-detail/venda-detail.page').then( m => m.VendaDetailPage)
-  },
+
   
 
   
