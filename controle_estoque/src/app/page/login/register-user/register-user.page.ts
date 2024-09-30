@@ -75,4 +75,8 @@ export class RegisterUserPage implements OnInit {
     this.isToastOpen = isOpen
   }
 
+  irLogin(){
+    this.router.navigate([`/login`])
+  }
+
 }
