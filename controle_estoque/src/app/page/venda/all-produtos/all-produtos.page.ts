@@ -56,6 +56,7 @@ export class AllProdutosPage implements OnInit {
                 nome: x.nome,
                 qntEstoque: x.quantidadeTotal,
                 valor: "R$ " + x.valor,
+                url: "validade",
                 segId: x.id
               }
               this.listar.push(y)

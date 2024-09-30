@@ -75,19 +75,18 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./page/venda/all-produtos/all-produtos.page').then(
         (m) => m.AllProdutosPage
-      ),
-      children: [
-          {
-            path: 'validade/:idprod',
-            loadComponent: () => import('./page/venda/validade-produto/validade-produto.page').then( m => m.ValidadeProdutoPage)
-          },
-          {
-            path: 'detail',
-            loadComponent: () => import('./page/venda/venda-detail/venda-detail.page').then( m => m.VendaDetailPage)
-          },
-        
-      ]
+      ),     
   },
+  {
+    path: 'venda/:id/validade/:idprod',
+    loadComponent: () => import('./page/venda/validade-produto/validade-produto.page').then( m => m.ValidadeProdutoPage)
+  },
+  {
+    path: 'venda/:id/detail',
+    loadComponent: () => import('./page/venda/venda-detail/venda-detail.page').then( m => m.VendaDetailPage)
+  },
+  
+
   
 
 ];
