@@ -16,7 +16,9 @@ import { Movimentacao } from 'src/app/model/movimentacao';
 })
 export class MovimentacaoComponent  implements OnInit {
 
-  constructor(private movimentacaoService: MovimentacaoService) { }
+  constructor(private movimentacaoService: MovimentacaoService) { 
+    addIcons({sadOutline, add, homeOutline, listOutline, settingsOutline, home, list, settings })
+  }
 
   movimentacoes: Movimentacao[] = [] 
 

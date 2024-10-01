@@ -7,6 +7,13 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'movimentacoes',
+    loadComponent: () =>
+      import('./page/movimentacao/movimentacao.component').then(
+        (m) => m.MovimentacaoComponent
+      ),
+  },
+  {
     path: 'estoques',
     loadComponent: () =>
       import('./page/estoque/estoque-list/estoque-list.page').then(
