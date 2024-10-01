@@ -1,5 +1,5 @@
-export interface User {
+export interface ValidadeDTO {
     id: number;
-    dataValidade: Date;
+    dataValidade: string;
     quantidade: number;
 }

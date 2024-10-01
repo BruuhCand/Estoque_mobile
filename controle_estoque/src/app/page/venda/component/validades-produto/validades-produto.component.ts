@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IonicModule,  ModalController  } from '@ionic/angular';
 import { Validade } from 'src/app/model/produto';
+import { ValidadeDTO } from 'src/app/model/validade';
 import { ProdutoService } from 'src/app/service/produto.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class ValidadesProdutoComponent  implements OnInit {
 
   @Input() produto: any; // Produto enviado como input
   form: FormGroup;
-  produtosVal: Validade[] = []
+  produtosVal: ValidadeDTO[] = []
 
   constructor(private modalCtrl: ModalController, private fb: FormBuilder, private produtoService: ProdutoService) {
     this.form = this.fb.group({
@@ -48,7 +49,9 @@ export class ValidadesProdutoComponent  implements OnInit {
     this.produtosVal.forEach((validade: any) => {
       this.validades.push(
         this.fb.group({
-          id: [validade.id],
+          id: [this.produto.id],
+          nome: [this.produto.nome],
+          idVal: [validade.id],
           validade: [validade.dataValidade, Validators.required],
           quantidade: [0, [Validators.required, Validators.min(0), Validators.max(validade.quantidade)]]
         })
@@ -72,14 +75,14 @@ export class ValidadesProdutoComponent  implements OnInit {
   }
 
   // Fecha o modal e retorna os valores selecionados
-  fecharComOk() {
+  confirm() {
     if (this.form.valid) {
       this.modalCtrl.dismiss(this.form.value); // Retorna o array com as quantidades, validades e IDs
     }
   }
 
   // Fecha o modal sem retornar nada
-  fecharModal() {
+  cancel() {
     this.modalCtrl.dismiss();
   }
 }

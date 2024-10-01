@@ -248,7 +248,7 @@ export class ProdutoCreatePage implements OnInit {
     const ev = event as CustomEvent<OverlayEventDetail<string>>;
     if (ev.detail.role === 'confirm' && ev.detail.data) {
       const newCategoria: Categoria = {
-        id: this.categorias.length + 1, // Exemplo: gerando um ID único
+        id: this.categorias.length + 1, 
         nome: ev.detail.data
       };
       this.categorias.push(newCategoria);
@@ -304,9 +304,6 @@ export class ProdutoCreatePage implements OnInit {
             next: (value) => {
               var idEstoque = this.formularioProduto.get('estoqueId')?.value
             console.log(idEstoque)
-            //this.router.navigate([`/estoque`, idEstoque, `produtos`]).then(() => {
-             // location.reload();
-           // });
             },
             error: (err) => {
               console.log(err)

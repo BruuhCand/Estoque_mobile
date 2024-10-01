@@ -5,3 +5,59 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 10%;
 }
+
+:host {
+    ion-content {
+        background-color: #D9D9D9 !important; /* Cor de fundo do conteúdo */
+    }
+
+    ion-toolbar {
+        background-color: #D9D9D9   !important; /* Cor do cabeçalho */
+    }
+}
+
+
+#container {
+    margin: 10% 0;
+}
+
+.header {
+    margin-top: 10%;
+}
+
+
+
+ion-col {
+    text-align: center;
+}
+
+.icon {
+    width: 50px;
+    height: 30px;
+}
+
+.button-redondo{
+    padding: 15px 15px;
+    background-color: #65558F;
+}
+
+ion-list{
+    height: 100%;
+    width: 100%;
+}
+
+
+.icon-header{
+    width: 20px;
+    height: 20px;
+}
+
+.custom-datetime {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+ion-button{
+    margin:10% 30% ;
+}
+  

@@ -1,8 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Selecionar Quantidades</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="cancel()">Cancel</ion-button>
+    </ion-buttons>
+    <ion-title>Validades produto {{produto.nome}}</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="fecharModal()">Cancelar</ion-button>
+      <ion-button (click)="confirm()" [strong]="true">Confirmar</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -24,6 +27,3 @@
   </form>
 </ion-content>
 
-<ion-footer>
-  <ion-button expand="full" (click)="fecharComOk()">Ok</ion-button>
-</ion-footer>

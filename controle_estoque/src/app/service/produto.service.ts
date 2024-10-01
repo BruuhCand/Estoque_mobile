@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Produto, ProdutoDTO, Validade } from '../model/produto';
 import { catchError, map, Observable, tap, throwError } from 'rxjs';
 import { API_CONFIG } from '../const/api.config';
+import { ValidadeDTO } from '../model/validade';
+import { Venda } from '../model/venda';
 
 @Injectable({
   providedIn: 'root'
@@ -86,15 +88,25 @@ export class ProdutoService {
     );
   }
 
-  getValidades(id: number): Observable<Validade[]>{
+  getValidades(id: number): Observable<ValidadeDTO[]>{
     let params = new HttpParams().set('produtoId', id.toString());
 
-    return this.http.get<{ data: Validade[] }>(`${API_CONFIG.baseUrl}/Validade`, {params})
+    return this.http.get<{ data: ValidadeDTO[] }>(`${API_CONFIG.baseUrl}/Validade`, {params})
       .pipe(
         map((response: { data: any; }) => response.data), 
         catchError(error => {
           return throwError(() => new Error('Falha ao obter validades'));
         })
       );
+  }
+
+  venda(vendas: Venda[]): Observable<any>{
+    return this.http.post<any>(`${API_CONFIG.baseUrl}/Produto/Venda`, vendas)
+     .pipe(
+      map((response: { data: any; }) => response.data), 
+      catchError(error => {
+        return throwError(() => new Error('Falha ao solicitar Venda'));
+      })
+    );
   }
 }
