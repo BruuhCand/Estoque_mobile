@@ -1,0 +1,39 @@
+<ion-toolbar class="header">
+  <ion-buttons slot="start">
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title>{{titulo}}</ion-title>
+  <div slot="end">
+    <ion-icon class="icon-header" name="create" id="edit-alert" ></ion-icon>
+    <ion-icon class="icon-header" name="trash" id="delete-alert"></ion-icon>
+  </div>
+
+</ion-toolbar>
+
+<ion-content [fullscreen]="true">
+  <router-outlet></router-outlet>
+</ion-content>
+
+<ion-toolbar>
+  <ion-grid>
+    <ion-row>
+      <ion-col><ion-icon name="home" class="icon"></ion-icon></ion-col>
+      <ion-col><ion-icon name="list" class="icon"></ion-icon></ion-col>
+      <ion-col><ion-icon name="settings" class="icon"></ion-icon></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-toolbar>
+
+<ion-alert
+  trigger="delete-alert"
+  header="Realmente deseja excluir o estoque {{this.estoqueAtual.nome}}"
+  [buttons]="alertButtons"
+></ion-alert>
+
+<ion-alert
+  trigger="edit-alert"
+  header="Digite o novo nome do estoque"
+  [buttons]="okButtons"
+  [inputs]="alertInputs"
+></ion-alert>
+
