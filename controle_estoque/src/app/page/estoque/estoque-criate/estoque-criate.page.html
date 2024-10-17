@@ -1,34 +1,40 @@
 <ion-toolbar class="header">
   <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+    <ion-menu-button class="menu-button"></ion-menu-button>
   </ion-buttons>
-  <ion-title>Cadastro de Estoque</ion-title>
+  <ion-title class="header-title">Cadastro de Estoque</ion-title>
 </ion-toolbar>
 
 <ion-content [fullscreen]="true">
   <div id="container">
-    <form (ngSubmit)="onSubmit()"> <!-- Formulário com evento submit -->
+    <form (ngSubmit)="onSubmit()">
       <ion-item>
         <ion-input [formControl]="estoqueNomeControl" labelPlacement="floating" placeholder="ex. estoque">
           <div slot="label">Digite o nome do Estoque<ion-text></ion-text></div>
         </ion-input>
       </ion-item>
   
-   
-      <ion-button  slot="" type="submit" expand="full" shape="round" [disabled]="!estoqueNomeControl.valid">
+      <ion-button class="submit-button button-solid" type="submit" expand="full" shape="round" [disabled]="!estoqueNomeControl.valid">
         Salvar
       </ion-button>
     </form>
-  
   </div>
 </ion-content>
 
-<ion-toolbar>
+<ion-toolbar class="footer-toolbar">
   <ion-grid>
-      <ion-row>
-          <ion-col><ion-icon name="home" class="icon"></ion-icon></ion-col>
-          <ion-col><ion-icon name="list" class="icon"></ion-icon></ion-col>
-          <ion-col><ion-icon name="settings" class="icon"></ion-icon></ion-col>
-      </ion-row>
+    <ion-row class="ion-align-items-center ion-justify-content-center" style="width: 100%; padding: 0;">
+      <ion-col class="ion-text-center" size="4"> <!-- Ajustado para 4 -->
+        <ion-button fill="clear" (click)="goBack()" class="button-clear">
+          <ion-icon name="home" slot="icon-only" class="icon"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col class="ion-text-center" size="4"> <!-- Ajustado para 4 -->
+        <ion-icon name="list" class="icon"></ion-icon>
+      </ion-col>
+      <ion-col class="ion-text-center" size="4"> <!-- Ajustado para 4 -->
+        <ion-icon name="settings" class="icon"></ion-icon>
+      </ion-col>
+    </ion-row>
   </ion-grid>
 </ion-toolbar>
