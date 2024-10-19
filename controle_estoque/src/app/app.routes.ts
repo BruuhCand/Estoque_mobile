@@ -46,6 +46,15 @@ export const routes: Routes = [
         path: 'compras',
         loadComponent: () => import('./page/estoque/estoque-detail/listas/compras/compras.page').then( m => m.ComprasPage)
       },
+      {
+        path: 'proximo-vencimento',
+        loadComponent: () => import('./page/estoque/estoque-detail/listas/proximo-vencimento/proximo-vencimento.page').then( m => m.ProximoVencimentoPage)
+      },
+      {
+        path: 'vencidos',
+        loadComponent: () => import('./page/estoque/estoque-detail/listas/vencidos/vencidos.page').then( m => m.VencidosPage)
+      },
+    
     ],
   },
   {
@@ -86,6 +95,8 @@ export const routes: Routes = [
     path: 'venda/:id',
     loadComponent: () => import('./page/venda/venda-produto/venda-produto.page').then( m => m.VendaProdutoPage)
   },
+
+
 
 
  
