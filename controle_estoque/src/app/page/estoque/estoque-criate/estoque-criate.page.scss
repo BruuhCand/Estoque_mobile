@@ -36,33 +36,28 @@
     display: flex; /* Para alinhar os ícones verticalmente */
     justify-content: center; /* Centraliza o conteúdo horizontalmente */
   }
-  
-  .icon {
-    width: 30px;   /* Largura dos ícones do rodapé */
-    height: 30px;  /* Altura dos ícones do rodapé */
-  }
-  
+
 
 
 .icon {
-    color: #424242; /* Cor dos ícones */
-    width: 30px; /* Largura dos ícones */
-    height: 30px; /* Altura dos ícones */
+    color: #424242; 
+    width: 30px; 
+    height: 30px; 
 }
-  /* Estilos para o botão de salvar */
+
   .submit-button {
     margin:auto;
     margin-top: 20%;
-    --color: #ffffff; /* Cor do texto em branco */
+    --color: #ffffff; 
     width:120px;
     
   }
   
-  /* Ajustes para a row do footer */
+
   ion-row {
-    width: 100%; /* Garante que a linha ocupe 100% da largura */
-    padding: 0; /* Remove qualquer padding padrão */
-    margin: 0; /* Remove qualquer margin padrão */
+    width: 100%;
+    padding: 0; 
+    margin: 0; 
   }
 
 

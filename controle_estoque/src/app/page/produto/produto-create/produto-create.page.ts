@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { add, home, homeOutline, list, listOutline, sadOutline, settings, settingsOutline, trash } from 'ionicons/icons';
 import { IonicModule, IonModal, IonAlert} from '@ionic/angular';
@@ -43,7 +43,7 @@ export class ProdutoCreatePage implements OnInit {
 
 
   constructor(private router: Router, private produtoService: ProdutoService, private  estoqueService: EstoqueService,
-    private categoriaService: CategoriaService) {
+    private categoriaService: CategoriaService, private locale: Location) {
 
     addIcons({sadOutline, add, homeOutline, listOutline, settingsOutline, home, list, settings, trash })
 
@@ -217,6 +217,10 @@ export class ProdutoCreatePage implements OnInit {
   setaCategoria(nomeCateg: string){
     var categEscolhida = this.categorias.find(x => x.nome == nomeCateg)
     this.formularioProduto.get('categoriaId')?.setValue(categEscolhida?.id)
+  }
+
+  goBack() {
+    this.locale.back();
   }
 
   //pop-up e modais

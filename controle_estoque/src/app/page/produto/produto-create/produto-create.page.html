@@ -69,12 +69,12 @@
     <ng-template>
       <ion-header>
         <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-button (click)="cancel()">Cancel</ion-button>
+          <ion-buttons  slot="start">
+            <ion-button color="none" (click)="cancel()">Cancel</ion-button>
           </ion-buttons>
           <ion-title>Nova Categoria</ion-title>
           <ion-buttons slot="end">
-            <ion-button (click)="confirm()" [strong]="true">Confirmar</ion-button>
+            <ion-button color="none"  (click)="confirm()" [strong]="true">Confirmar</ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
@@ -105,12 +105,20 @@
 
 </ion-content>
 
-<ion-toolbar>
+<ion-toolbar class="footer-toolbar">
   <ion-grid>
-    <ion-row>
-      <ion-col><ion-icon name="home" class="icon"></ion-icon></ion-col>
-      <ion-col><ion-icon name="list" class="icon"></ion-icon></ion-col>
-      <ion-col><ion-icon name="settings" class="icon"></ion-icon></ion-col>
+    <ion-row class="ion-align-items-center ion-justify-content-center" style="width: 100%; padding: 0;">
+      <ion-col class="ion-text-center" size="4"> <!-- Ajustado para 4 -->
+        <ion-button  fill="clear" (click)="goBack()" color="none" class="button-clear">
+          <ion-icon name="home" slot="icon-only" class="icon"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col class="ion-text-center" size="4"> <!-- Ajustado para 4 -->
+        <ion-icon name="list" class="icon"></ion-icon>
+      </ion-col>
+      <ion-col class="ion-text-center" size="4"> <!-- Ajustado para 4 -->
+        <ion-icon name="settings" class="icon"></ion-icon>
+      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-toolbar>
