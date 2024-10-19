@@ -28,7 +28,7 @@
       </ion-item> <!-- selecionar a ação entrada ou saída -->
 
 
-      <ion-button slot="" type="submit" expand="full" shape="round" [disabled]="formAcao.invalid">
+      <ion-button class="botao-next" type="submit" expand="full" shape="round" [disabled]="formAcao.invalid">
         next
       </ion-button>
     </form> <!-- botão pra enviar formulário -->
@@ -36,12 +36,20 @@
   </div>
 </ion-content>
 
-<ion-toolbar> <!-- rodapé navegação -->
+<ion-toolbar class="footer-toolbar">
   <ion-grid>
-    <ion-row>
-      <ion-col><ion-icon name="home" class="icon"></ion-icon></ion-col>
-      <ion-col><ion-icon name="list" class="icon"></ion-icon></ion-col>
-      <ion-col><ion-icon name="settings" class="icon"></ion-icon></ion-col>
+    <ion-row class="ion-align-items-center ion-justify-content-center" style="width: 100%; padding: 0;">
+      <ion-col class="ion-text-center" size="4"> <!-- Ajustado para 4 -->
+        <ion-button fill="clear" (click)="goBack()" color="none" class="button-clear">
+          <ion-icon name="home" slot="icon-only" class="icon"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col class="ion-text-center" size="4"> <!-- Ajustado para 4 -->
+        <ion-icon name="list" class="icon"></ion-icon>
+      </ion-col>
+      <ion-col class="ion-text-center" size="4"> <!-- Ajustado para 4 -->
+        <ion-icon name="settings" class="icon"></ion-icon>
+      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-toolbar>

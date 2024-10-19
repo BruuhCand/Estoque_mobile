@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import {
   FormControl,
   FormGroup,
@@ -37,7 +37,7 @@ export class ControleProdutoPage implements OnInit {
     { id: 2, nome: 'saida' },
   ];
 
-  constructor(private router: Router, private estoqueService: EstoqueService) {
+  constructor(private router: Router, private estoqueService: EstoqueService, private location: Location) {
     addIcons({
       sadOutline,
       homeOutline,
@@ -88,4 +88,9 @@ export class ControleProdutoPage implements OnInit {
       },
     });
   }
+
+  goBack() {
+    this.location.back();
+  }
+
 }
