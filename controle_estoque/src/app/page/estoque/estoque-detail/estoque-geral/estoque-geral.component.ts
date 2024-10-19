@@ -20,8 +20,7 @@ export class EstoqueGeralComponent  implements OnInit {
   estoqueGeral: any = [
     {nome: "Todos produtos", url: "produtos"},
     {nome: "Lista de compras", url: "compras"},
-    {nome: "Abaixo do estoque", url: "estoquemin"},
-    {nome: "Próximo vencimento", url: "vencimento"},
+    {nome: "Próximo vencimento", url: "prox-vencimento"},
     {nome: "Produtos vencidos", url: "vencidos"}
   ]
   private activatedRoute = inject(ActivatedRoute);

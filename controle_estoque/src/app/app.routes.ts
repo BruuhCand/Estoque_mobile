@@ -38,8 +38,13 @@ export const routes: Routes = [
         path: 'produtos',
         loadComponent: () =>
           import(
-            './page/estoque/estoque-detail/estoque-all-produtos/estoque-all-produtos.component'
+            './page/estoque/estoque-detail/listas/estoque-all-produtos/estoque-all-produtos.component'
           ).then((m) => m.EstoqueAllProdutosComponent),
+      },
+
+      {
+        path: 'compras',
+        loadComponent: () => import('./page/estoque/estoque-detail/listas/compras/compras.page').then( m => m.ComprasPage)
       },
     ],
   },
@@ -81,6 +86,11 @@ export const routes: Routes = [
     path: 'venda/:id',
     loadComponent: () => import('./page/venda/venda-produto/venda-produto.page').then( m => m.VendaProdutoPage)
   },
+
+
+ 
+
+
 
   
 

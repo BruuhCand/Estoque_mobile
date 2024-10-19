@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IonicModule, ToastController } from '@ionic/angular';
 import { addIcons } from 'ionicons';
@@ -26,7 +26,7 @@ export class EstoqueDetailPage implements OnInit {
   estoqueAtual: Estoque = {
     nome: ''
   };
-  constructor(private estoqueService: EstoqueService, private router: Router, private toastController: ToastController) { 
+  constructor(private estoqueService: EstoqueService, private router: Router, private toastController: ToastController, private locate: Location) { 
     addIcons({sadOutline, add, homeOutline, listOutline, settingsOutline, home, list, settings, remove, trash, create})
 
   }
@@ -55,6 +55,10 @@ export class EstoqueDetailPage implements OnInit {
 
   reloadTitle(nome: string){
     this.titulo = this.titulo + nome ;
+  }
+
+  goBack() {
+    this.locate.back();
   }
 
   update(estoqueNew: Estoque){
