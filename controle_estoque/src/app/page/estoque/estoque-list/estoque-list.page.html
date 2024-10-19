@@ -7,7 +7,7 @@
 
 <ion-content [fullscreen]="true">
   <div id="container">
-      <app-list-util [dadosList] = "estoques" [atributos] = "atributos" [entity]="pagina"></app-list-util>
+      <app-list-util style="width: 100%;" [dadosList] = "estoques" [atributos] = "atributos" [entity]="pagina"></app-list-util>
 
       <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="botao">
           <ion-button shape="round" (click)="navegar()">
@@ -21,7 +21,7 @@
   <ion-grid>
     <ion-row class="ion-align-items-center ion-justify-content-center" style="width: 100%; padding: 0;">
       <ion-col class="ion-text-center" size="4"> <!-- Ajustado para 4 -->
-        <ion-button fill="clear" (click)="goBack()" class="button-clear">
+        <ion-button fill="clear" (click)="goBack()" color="none" class="button-clear">
           <ion-icon name="home" slot="icon-only" class="icon"></ion-icon>
         </ion-button>
       </ion-col>

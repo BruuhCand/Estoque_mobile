@@ -50,4 +50,28 @@ export class ListUtilComponent  implements OnInit {
     }
   }
 
+  getEstiloItem(item: any) {
+    if (item.validade) {
+      const validade = new Date(item.validade);  
+      const hoje = new Date();
+      const umaSemana = new Date();
+      umaSemana.setDate(hoje.getDate() + 7);
+  
+      // Verifica se a validade é menor que hoje
+      if (validade < hoje) {
+        return {
+          'border-color': 'red'  // Validade já expirou
+        };
+      } 
+      // Verifica se a validade está dentro de uma semana
+      else if (validade >= hoje && validade <= umaSemana) {
+        return {
+          'border-color': 'yellow'  // Validade expira em menos de 7 dias
+        };
+      } 
+    }
+  
+    return {}; // Retorna sem estilos se não houver validade
+  }
+
 }

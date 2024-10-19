@@ -52,6 +52,7 @@ export class EstoqueAllProdutosComponent  implements OnInit {
                 nome: x.nome,
                 qntEstoque: x.quantidadeTotal,
                 valor: "R$ " + x.valor,
+                validade: x.validades[0].dataValidade
               }
               this.listar.push(y)
           })      
