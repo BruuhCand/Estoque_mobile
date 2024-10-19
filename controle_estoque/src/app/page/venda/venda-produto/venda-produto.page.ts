@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule,  ModalController  } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -29,7 +29,7 @@ export class VendaProdutoPage implements OnInit {
   vendaArray: any[] = []
 
 
-  constructor( private produtoService: ProdutoService, private modalCtrl: ModalController) { 
+  constructor( private produtoService: ProdutoService, private modalCtrl: ModalController, private location: Location) { 
     addIcons({sadOutline, add, homeOutline, listOutline, settingsOutline, home, list, settings, remove, trash, create})
   }
 
@@ -69,6 +69,10 @@ export class VendaProdutoPage implements OnInit {
         }
        })
     }
+  }
+
+  goBack() {
+    this.location.back();
   }
 
   async abrirModal(produto: any) {

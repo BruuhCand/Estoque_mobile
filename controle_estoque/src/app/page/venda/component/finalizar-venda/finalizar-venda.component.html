@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title>Finalizar Venda</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="cancel()" [strong]="true">cancel</ion-button>
+      <ion-button  color="none" (click)="cancel()" [strong]="true">cancel</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -31,5 +31,5 @@
     </ion-item-sliding>
   </ion-list>
 
-  <ion-button (click)="finalizarVenda()">Finalizar</ion-button>
+  <ion-button (click)="finalizarVenda()" class="botao-finalizar">Finalizar</ion-button>
 </ion-content>
