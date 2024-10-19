@@ -3,20 +3,11 @@
     --ion-color-primary: #6D4D8B; /* Define a cor primária como roxa */
     --ion-color-primary-contrast: #FFFFFF; /* Cor do texto em branco para contraste */
 }
-
-:host(.button-solid) {
-    --background: var(--ion-color-primary, #6D4D8B); /* Usará a nova cor primária */
-    --color: var(--ion-color-primary-contrast, #fff); /* Usará a nova cor de contraste */
-}
-
 :host {
     ion-content {
       background-color: #D9D9D9 !important; /* Cor de fundo do conteúdo */
     }
   
-    ion-toolbar.header {
-      background-color: #6D4D8B; /* Cor do cabeçalho */
-    }
   
     ion-title.header-title {
       color: #424242 !important; /* Cor do texto do cabeçalho em preto */
@@ -37,7 +28,7 @@
   }
   
   .header {
-    margin-top: 10%;
+    padding-top: 10%;
   }
   
   ion-col {
@@ -51,11 +42,7 @@
     height: 30px;  /* Altura dos ícones do rodapé */
   }
   
-  .button-clear {
-    --border-width: 0;
-    --background: transparent;
-    --color: #6D4D8B; /* Cor do ícone no botão claro */
-}
+
 
 .icon {
     color: #424242; /* Cor dos ícones */
@@ -64,10 +51,11 @@
 }
   /* Estilos para o botão de salvar */
   .submit-button {
-    margin-top: 20px;
-    color: #FFFFFF; /* Cor do texto em branco */
+    margin:auto;
+    margin-top: 20%;
+    --color: #ffffff; /* Cor do texto em branco */
+    width:120px;
     
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Sombra para dar destaque ao botão */
   }
   
   /* Ajustes para a row do footer */
