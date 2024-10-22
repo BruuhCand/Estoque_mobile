@@ -25,10 +25,10 @@
     ion-toolbar.footer-toolbar {
       background-color: #F0F0F0; /* Cor do fundo do rodapé */
     }
+    .list-ios {
+      background: transparent !important; /* Sobrescreve o fundo com uma cor transparente */
+  }
   }
 
   
 
-  .list-ios {
-    background: transparent !important; /* Sobrescreve o fundo com uma cor transparente */
-}
