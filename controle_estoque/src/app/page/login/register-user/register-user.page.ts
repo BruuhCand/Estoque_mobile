@@ -57,7 +57,7 @@ export class RegisterUserPage implements OnInit {
         error: (err) => {
           console.error('Erro ao fazer login:', err);
           this.openToast(false, true)
-          this.formRegister.reset(); 
+          this.formRegister.reset({nome: '', email: '', senha: '', role: '' });
         }
       });
     }
