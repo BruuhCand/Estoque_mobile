@@ -1,0 +1,48 @@
+<ion-toolbar class="header">
+  <ion-buttons slot="start">
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title>Venda</ion-title>
+  <div slot="end">
+    <ion-icon class="icon-header" name="create" id="edit-alert" ></ion-icon>
+    <ion-icon class="icon-header" name="trash" id="delete-alert"></ion-icon>
+  </div>
+
+</ion-toolbar>
+
+<ion-content [fullscreen]="true">
+  <div class="titulo">  
+    <h4>Todos os produtos</h4>
+  </div>
+
+  <div *ngIf="listar.length > 0">
+    <ion-list lines="none">
+      <ion-item *ngFor="let list of listar" class="custom-item" >
+          <div style="flex: 1; display: flex; justify-content: space-between;" (click)="abrirModal(list)">
+              <ion-label>{{ list.nome}}</ion-label>
+              <ion-label>{{ list.qntEstoque}}</ion-label>
+              <ion-label>{{ list.valor}}</ion-label>
+          </div>
+      </ion-item>
+    </ion-list>
+  </div>
+  <ion-button (click)="finalizarVenda()" class="botao">Finalizar Venda</ion-button>
+</ion-content>
+
+<ion-toolbar class="footer-toolbar">
+  <ion-grid>
+    <ion-row class="ion-align-items-center ion-justify-content-center" style="width: 100%; padding: 0;">
+      <ion-col class="ion-text-center" size="4"> <!-- Ajustado para 4 -->
+        <ion-button  fill="clear" (click)="goBack()" color="none" class="button-clear">
+          <ion-icon name="home" slot="icon-only" class="icon"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col class="ion-text-center" size="4"> <!-- Ajustado para 4 -->
+        <ion-icon name="list" class="icon"></ion-icon>
+      </ion-col>
+      <ion-col class="ion-text-center" size="4"> <!-- Ajustado para 4 -->
+        <ion-icon name="settings" class="icon"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-toolbar>

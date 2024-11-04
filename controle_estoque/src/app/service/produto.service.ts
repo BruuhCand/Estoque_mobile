@@ -1,8 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Produto, ProdutoDTO } from '../model/produto';
+import { Produto, ProdutoDTO, Validade } from '../model/produto';
 import { catchError, map, Observable, tap, throwError } from 'rxjs';
 import { API_CONFIG } from '../const/api.config';
+import { ValidadeDTO } from '../model/validade';
+import { Venda } from '../model/venda';
 
 @Injectable({
   providedIn: 'root'
@@ -12,21 +14,29 @@ export class ProdutoService {
   constructor(private http: HttpClient) { }
 
   create(produto: Produto): Observable<any> {
-    return this.http.post<{title: string}>(`${API_CONFIG.baseUrl}/Produto`, produto)
+    return this.http.post<any>(`${API_CONFIG.baseUrl}/Produto`, produto)
       .pipe(
         tap(response => {
-          return response.title
+          return response
         }),
         catchError(error => {
-          console.error('Erro de login:', error);
-          return throwError(() => new Error('Falha ao criar produto'));
+          if (error.error && error.error.message) {
+            // Retorna a mensagem específica do erro
+            return throwError(() => new Error(error.error.message));
+          } else {
+            // Retorna uma mensagem genérica de erro caso a resposta não tenha uma mensagem detalhada
+            return throwError(() => new Error('Falha ao criar produto.'));
+          }
         })
       );
   }
 
-  //ta errado
+  
   getAll(id: number): Observable<ProdutoDTO[]> {
-    return this.http.get<{ data: ProdutoDTO[] }>(`${API_CONFIG.baseUrl}/Produto/${id}`)
+
+    let params = new HttpParams().set('estoqueId', id.toString());
+    
+    return this.http.get<{ data: ProdutoDTO[] }>(`${API_CONFIG.baseUrl}/Produto`, {params})
       .pipe(
         map((response: { data: any; }) => response.data), 
         catchError(error => {
@@ -46,15 +56,57 @@ export class ProdutoService {
   }
 
   update(produto: Produto, id: number): Observable<any> {
-    return this.http.put<{title: string}>(`${API_CONFIG.baseUrl}/Produto/${id}`, produto)
+    return this.http.put<any>(`${API_CONFIG.baseUrl}/Produto/${id}`, produto)
       .pipe(
         tap(response => {
-          return response.title
+          return response
         }),
         catchError(error => {
           console.error('Erro de login:', error);
-          return throwError(() => new Error('Falha ao criar estoque'));
+          return error;
         })
       );
+  }
+
+  getByCodBarras(codigo: number): Observable<ProdutoDTO>{
+    return this.http.get<{data: ProdutoDTO}>(`${API_CONFIG.baseUrl}/Produto/CodBarras/${codigo}`)
+    .pipe(
+      map(response => response.data),
+      catchError(error => {
+        return throwError(() => new Error('Falha ao obter produto'));
+      })
+    );
+  }
+
+  delete(id: number): Observable<any>{
+    return this.http.delete<any>(`${API_CONFIG.baseUrl}/Produto/${id}`)
+    .pipe(
+      map(response => response.data),
+      catchError(error => {
+        return throwError(() => new Error('Falha ao deletar produto'));
+      })
+    );
+  }
+
+  getValidades(id: number): Observable<ValidadeDTO[]>{
+    let params = new HttpParams().set('produtoId', id.toString());
+
+    return this.http.get<{ data: ValidadeDTO[] }>(`${API_CONFIG.baseUrl}/Validade`, {params})
+      .pipe(
+        map((response: { data: any; }) => response.data), 
+        catchError(error => {
+          return throwError(() => new Error('Falha ao obter validades'));
+        })
+      );
+  }
+
+  venda(vendas: Venda[]): Observable<any>{
+    return this.http.post<any>(`${API_CONFIG.baseUrl}/Produto/Venda`, vendas)
+     .pipe(
+      map((response: { data: any; }) => response.data), 
+      catchError(error => {
+        return throwError(() => new Error('Falha ao solicitar Venda'));
+      })
+    );
   }
 }

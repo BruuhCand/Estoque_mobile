@@ -1,0 +1,47 @@
+<ion-toolbar class="header">
+  <ion-buttons slot="start">
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title>Movimentações</ion-title>
+</ion-toolbar>
+
+<ion-content [fullscreen]="true">
+  <div id="container">
+
+    <!-- Lista de movimentações -->
+    <ion-list>
+      <ion-item *ngFor="let movimentacao of movimentacoes">
+        <ion-label>
+          <!-- Exibindo as principais informações da movimentação -->
+          <h2>Tipo: {{ movimentacao.tipo }}</h2>
+          <p>Quantidade: {{ movimentacao.quantidade }}</p>
+          <p>Data: {{ movimentacao.dataMovimentacao | date: 'shortDate' }}</p>
+          <p>Valor Total: R$ {{ movimentacao.valorTotal | number:'1.2-2' }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
+
+<!-- Barra inferior com ícones -->
+<ion-toolbar class= "footer-toolbar">
+  <ion-grid>
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col size="4" class="ion-text-center">
+        <ion-button color="none"  fill="clear" routerLink="/home">
+          <ion-icon name="home"  class="icon"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col  size="4" class="ion-text-center">
+        <ion-button color="none" fill="clear" routerLink="/movimentacoes">
+          <ion-icon name="list" class="icon"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col  size="4" class="ion-text-center">
+        <ion-button color="none" fill="clear" routerLink="/settings">
+          <ion-icon name="settings" class="icon"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-toolbar>

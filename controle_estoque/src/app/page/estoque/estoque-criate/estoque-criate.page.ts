@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { addIcons } from 'ionicons';
@@ -19,7 +19,7 @@ export class EstoqueCriatePage implements OnInit {
 
   estoqueNomeControl = new FormControl('', [Validators.required]);
 
-  constructor(private estoqueService: EstoqueService, private router: Router) {
+  constructor(private estoqueService: EstoqueService, private router: Router,  private location: Location) {
     addIcons({sadOutline, homeOutline, listOutline, settingsOutline, home, list, settings })
    }
 
@@ -50,6 +50,9 @@ export class EstoqueCriatePage implements OnInit {
       })
     }
     
+  }
+  goBack() {
+    this.location.back();
   }
 
 

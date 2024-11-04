@@ -48,7 +48,7 @@ export class LoginPage implements OnInit {
         error: (err) => {
           console.error('Erro ao fazer login:', err);
           this.mensagemLogin(false, true)
-          this.form.reset(); 
+          this.form.reset({ email: '', senha: '' });
         }
       });
     }

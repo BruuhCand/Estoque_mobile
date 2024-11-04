@@ -37,9 +37,26 @@
 @import '@ionic/angular/css/palettes/dark.system.css';
 
 ion-content {
-    background-color: #D9D9D9 !important; /* Força a cor de fundo */
+    --background: #e5e5e5 !important; /* Força a cor de fundo */
 }
 
 ion-toolbar {
-    background-color: #D9D9D9 !important; /* Força a cor do cabeçalho */
+    --background: #e5e5e5 !important; /* Força a cor do cabeçalho */
+}
+
+ion-title {
+    color: #000000; /* Cor do texto em preto */
+  }
+
+ion-button{
+    --background: #6D4D8B !important;
+}
+
+.footer-toolbar{
+    --background: #fbfbfb !important; 
+}
+
+.ion-item{
+    --background: #e5e5e5 !important; /* Força a cor do cabeçalho */
+
 }

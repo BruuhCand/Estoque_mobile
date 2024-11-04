@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { IonicModule} from '@ionic/angular';
 import { Estoque } from 'src/app/model/estoque';
@@ -18,7 +18,7 @@ import { EstoqueService } from 'src/app/service/estoque.service';
 export class EstoqueListPage implements OnInit {
 
   
-  constructor(private router: Router, private estoqueService: EstoqueService) { 
+  constructor(private router: Router, private estoqueService: EstoqueService,  private location: Location) { 
     addIcons({sadOutline, add, homeOutline, listOutline, settingsOutline, home, list, settings })
   }
 
@@ -40,6 +40,10 @@ export class EstoqueListPage implements OnInit {
 
   navegar(){
     this.router.navigate([`/estoques/create`])
+  }
+
+  goBack() {
+    this.location.back();
   }
 
 }

@@ -4,4 +4,31 @@
     margin: 10px 10%; /* Espaçamento entre os itens */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 10%;
+    border-color: #38B698;
 }
+
+:host {
+    ion-content {
+      background-color: #D9D9D9 !important; /* Cor de fundo do conteúdo */
+    }
+  
+  
+    ion-title.header-title {
+      color: #424242 !important; /* Cor do texto do cabeçalho em preto */
+    }
+  
+    ion-menu-button.menu-button {
+      color: #424242; /* Cor do ícone do botão de menu em preto */
+    }
+  
+    /* Rodapé */
+    ion-toolbar.footer-toolbar {
+      background-color: #F0F0F0; /* Cor do fundo do rodapé */
+    }
+    .list-ios {
+      background: transparent !important; /* Sobrescreve o fundo com uma cor transparente */
+  }
+  }
+
+  
+

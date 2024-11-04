@@ -1,43 +1,70 @@
+
+:root {
+    --ion-color-primary: #6D4D8B; /* Define a cor primária como roxa */
+    --ion-color-primary-contrast: #FFFFFF; 
+}
 :host {
     ion-content {
-        background-color: #D9D9D9 !important; /* Cor de fundo do conteúdo */
+      background-color: #D9D9D9 !important; 
     }
-
-    ion-toolbar {
-        background-color: #D9D9D9   !important; /* Cor do cabeçalho */
+  
+  
+    ion-title {
+      color: #424242 !important; 
     }
-}
-
-
-.custom-item {
-    border: 1px solid #ccc; /* Cor da borda */
-    border-radius: 10px; /* Bordas arredondadas */
-    margin: 10px 20%; /* Espaçamento entre os itens */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-#container {
-    margin: 10% 0;
-}
-
-.header {
-    margin-top: 10%;
-}
-
-.botao {
-    margin-bottom: 20%;
-}
-
-ion-col {
+  
+    ion-menu-button {
+      color: #424242; 
+    }
+  
+    /* Rodapé */
+    ion-toolbar.footer-toolbar {
+      background-color: #F0F0F0; /* Cor do fundo do rodapé */
+    }
+  }
+  
+  #container {
+    margin: 10% 15%;
+  }
+  
+  .header {
+    padding-top: 10%;
+  }
+  
+  ion-col {
     text-align: center;
-}
+    display: flex; 
+    justify-content: center; 
+  }
+  
+  .icon {
+    width: 30px;   
+    height: 30px;  
+    color: #424242; 
+  }
+  
 
-.icon {
-    width: 50px;
-    height: 30px;
-}
+  .submit-button {
+    margin:auto;
+    margin-top: 20%;
+    --color: #ffffff; /* Cor do texto em branco */
+    width:120px;
+    
+  }
+  
+  /* Ajustes para a row do footer */
+  ion-row {
+    width: 100%; /* Garante que a linha ocupe 100% da largura */
+    padding: 0; /* Remove qualquer padding padrão */
+    margin: 0; /* Remove qualquer margin padrão */
+  }
+
 
 .button-redondo{
     padding: 15px 15px;
-    background-color: #65558F;
+   
+}
+
+.botao{
+    margin-bottom: 25%;
 }

@@ -1,15 +1,17 @@
-<div *ngIf="dadosList.length > 0; else zerado">
-  <ion-list lines="none">
-    <ion-item *ngFor="let list of dadosList" class="custom-item" >
-        <div style="flex: 1; display: flex; justify-content: space-between;" (click)="navegar(list)">
-          <ng-container *ngFor="let carac of atributos">
-            <ion-label>{{ list[carac] }}</ion-label>
-          </ng-container>
-        </div>
-    </ion-item>
-  </ion-list>
+<div class="container">
+  <div *ngIf="dadosList.length > 0; else zerado">
+    <ion-list lines="none">
+      <ion-item *ngFor="let list of dadosList" class="custom-item" [ngStyle]="getEstiloItem(list)">
+          <div style="flex: 1; display: flex; justify-content: space-between;" (click)="navegar(list)">
+            <ng-container *ngFor="let carac of atributos">
+              <ion-label>{{ list[carac] }}</ion-label>
+            </ng-container>
+          </div>
+      </ion-item>
+    </ion-list>
+  </div>
+  
+  <ng-template #zerado>
+  </ng-template>
 </div>
 
-<ng-template #zerado>
-  <p>teste</p>
-</ng-template>

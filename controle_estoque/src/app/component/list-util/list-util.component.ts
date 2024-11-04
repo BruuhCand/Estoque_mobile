@@ -21,26 +21,57 @@ export class ListUtilComponent  implements OnInit {
     console.log(this.dadosList)
   }
 
-  navegar(objeto: any){
-    console.log("entrou aqui")
-
-    var construUrl = this.entity
-
-    if(objeto.id){
-      construUrl += "/" + objeto.id;
+  navegar(objeto: any) {
+    console.log("entrou aqui");
+  
+    let construUrl = this.entity;
+  
+    if (objeto.id) {
+      construUrl += `/${objeto.id}`;
+    }
+  
+    if (objeto.url) {
+      construUrl += `/${objeto.url}`;
     }
 
-    if(objeto.url){
-      construUrl += "/" + objeto.url
+    if(objeto.segId){
+      construUrl += `/${objeto.segId}`;
     }
-
-    if (construUrl != this.entity){
-
+  
+    // Verifica se algo foi adicionado à URL antes de navegar
+    if (construUrl !== this.entity) {
       this.router.navigate([`/${construUrl}`]).then(() => {
-        location.reload();
+        
       });
+
+      
+    } else {
+      console.log("Nenhuma navegação realizada.");
     }
-    
+  }
+
+  getEstiloItem(item: any) {
+    if (item.validade) {
+      const validade = new Date(item.validade);  
+      const hoje = new Date();
+      const umaSemana = new Date();
+      umaSemana.setDate(hoje.getDate() + 7);
+  
+      // Verifica se a validade é menor que hoje
+      if (validade < hoje) {
+        return {
+          'border-color': 'red'  // Validade já expirou
+        };
+      } 
+      // Verifica se a validade está dentro de uma semana
+      else if (validade >= hoje && validade <= umaSemana) {
+        return {
+          'border-color': 'yellow'  // Validade expira em menos de 7 dias
+        };
+      } 
+    }
+  
+    return {}; // Retorna sem estilos se não houver validade
   }
 
 }

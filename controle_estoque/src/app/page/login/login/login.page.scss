@@ -1,14 +1,53 @@
+ion-content {
+    --background: #d9d9d9; /* Define o background */
+    margin: 0;
+    padding: 0;
+  }
+
 .custom-item {
-    border: 1px solid #ccc; /* Cor da borda */
-    border-radius: 10px; /* Bordas arredondadas */
-    margin: 10px 10%; /* Espaçamento entre os itens */
+    border: 1px solid #ccc;
+    --border-radius: 16px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 10%;
     width: 80%;
+    --padding-start: 10px;
+    --background:  #ECE6F0;
+    color: #685a8d;   
+    margin-top: 25px;
+}
+
+.form-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 200px;
 }
 
 .botao{
+    --background: #65558F;
+    --border-radius: 100px;
     width: 50%;
-    margin: 25%;
+    margin: 10% 25% 10% 25%;
+    --color: #fff;
+}
+
+p{
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+span{
+    color: #594e79;
+    text-align: center;
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+}
+
+.forget-password{
+    color: #38B698;
+    font-size: 13px;
+    margin-top: 10px;
 }
 

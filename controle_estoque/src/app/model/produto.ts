@@ -12,7 +12,7 @@ export interface Produto{
     categoriaId: number;
     categoria?: Categoria;
     valor: number;
-    validade: Date;
+    dataValidade: string;
     estoqueId: number;
     estoque?: Estoque;
 
@@ -20,7 +20,7 @@ export interface Produto{
 }
 
 export interface Validade{
-    validadeData:Date;
+    dataValidade:Date;
     quantidade: number;    
 }
 
@@ -28,12 +28,12 @@ export interface ProdutoDTO{
     id?: number;
     nome: string;
     codigoBarras: number;
-    quantidade: number;
+    quantidadeTotal: number;
     quantidadeMinima: number;
-    categoriaId: number;
+    categoriaNome: string;
     categoria?: Categoria;
     valor: number;
-    validade: Validade[];
+    validades: Validade[];
     estoqueId: number;
     estoque?: Estoque;
 }

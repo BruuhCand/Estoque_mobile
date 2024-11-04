@@ -1,20 +1,33 @@
+:root {
+    --ion-color-primary: #6D4D8B; /* Define a cor primária como roxa */
+    --ion-color-primary-contrast: #FFFFFF; /* Cor do texto em branco para contraste */
+}
 :host {
     ion-content {
-        background-color: #D9D9D9 !important; /* Cor de fundo do conteúdo */
+      background-color: #D9D9D9 !important; /* Cor de fundo do conteúdo */
     }
-
-    ion-toolbar {
-        background-color: #D9D9D9   !important; /* Cor do cabeçalho */
+  
+  
+    ion-title.header-title {
+      color: #424242 !important; /* Cor do texto do cabeçalho em preto */
     }
-}
-
+  
+    ion-menu-button.menu-button {
+      color: #424242; /* Cor do ícone do botão de menu em preto */
+    }
+  
+    /* Rodapé */
+    ion-toolbar.footer-toolbar {
+      background-color: #F0F0F0; /* Cor do fundo do rodapé */
+    }
+  }
 
 #container {
     margin: 10% 0;
 }
 
 .header {
-    margin-top: 10%;
+    padding-top: 10%;
 }
 
 .botao {
@@ -26,8 +39,9 @@ ion-col {
 }
 
 .icon {
-    width: 50px;
-    height: 30px;
+    color: #424242; 
+    width: 30px; 
+    height: 30px; 
 }
 
 .button-redondo{
@@ -41,7 +55,7 @@ ion-list{
 }
 
 .custom-item {
-    margin: 5% 10%; /* Espaçamento entre os itens */
+    margin: 5% 5%; /* Espaçamento entre os itens */
    
 }
 
@@ -49,3 +63,13 @@ ion-list{
     width: 20px;
     height: 20px;
 }
+
+.custom-datetime {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .list-ios {
+    background: transparent !important; /* Sobrescreve o fundo com uma cor transparente */
+}
+  

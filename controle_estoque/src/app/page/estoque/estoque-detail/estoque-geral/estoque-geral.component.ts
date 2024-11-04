@@ -20,8 +20,7 @@ export class EstoqueGeralComponent  implements OnInit {
   estoqueGeral: any = [
     {nome: "Todos produtos", url: "produtos"},
     {nome: "Lista de compras", url: "compras"},
-    {nome: "Abaixo do estoque", url: "estoquemin"},
-    {nome: "Próximo vencimento", url: "vencimento"},
+    {nome: "Próximo vencimento", url: "proximo-vencimento"},
     {nome: "Produtos vencidos", url: "vencidos"}
   ]
   private activatedRoute = inject(ActivatedRoute);
@@ -40,14 +39,14 @@ export class EstoqueGeralComponent  implements OnInit {
   }
 
   adicionaProd(){
-    console.log("entrou aquiii2")
+   
     this.route.navigate(([`/produto/create`]), {
       state: { estoqueId: this.idPagina},
     });
   }
 
   removeProd(){
-    
+    this.route.navigate([`/venda`, this.idPagina]);
   }
 
 }

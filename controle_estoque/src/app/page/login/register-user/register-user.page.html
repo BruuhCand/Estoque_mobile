@@ -1,30 +1,20 @@
-<ion-toolbar class="header">
-  <ion-title>Cadastro de Users</ion-title>
-</ion-toolbar>
-
 <ion-content class="div">
   <form [formGroup]="formRegister" (ngSubmit)="onSubmit()">
-    <ion-list>
-    
-      <ion-item class="custom-item">
-        <ion-input label="Nome" type="text" label-placement="floating" fill="outline" formControlName="nome"></ion-input>
-      </ion-item>
 
-      <ion-item class="custom-item">
-        <ion-input label="Email" type="email" label-placement="floating" fill="outline"  formControlName="email"></ion-input>
-      </ion-item>
+      <div class="form-container"> 
+        <ion-input label="Nome" type="text" label-placement="floating" fill="outline" class="custom-item" formControlName="nome"></ion-input>
+
+        <ion-input label="Email" type="email" label-placement="floating" fill="outline" class="custom-item"  formControlName="email"></ion-input>
       
-      <ion-item class="custom-item">
-        <ion-input label="Senha" type="text" label-placement="floating" fill="outline"  formControlName="senha" ></ion-input>
-      </ion-item>
+        <ion-input label="Senha" type="text" label-placement="floating" fill="outline" class="custom-item" formControlName="senha" type="password" ></ion-input>
 
-      <ion-item class="custom-item">
-        <ion-input label="Role" type="text" label-placement="floating" fill="outline"  formControlName="role"></ion-input>
-      </ion-item>
-    </ion-list>
+        <ion-input label="Role" type="text" label-placement="floating" fill="outline" class="custom-item" formControlName="role"></ion-input>
+      </div>
 
-    <ion-button type="submit" expand="full" [disabled]="formRegister.invalid">Enviar</ion-button>
+    <ion-button type="submit" class="botao" expand="full" [disabled]="formRegister.invalid">Enviar</ion-button>
   </form>
+
+  <p (click)="irLogin()">Já possui uma conta? <span>Entrar</span></p>
 
 </ion-content>
 

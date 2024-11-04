@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IonicModule, ToastController } from '@ionic/angular';
 import { addIcons } from 'ionicons';
@@ -26,7 +26,7 @@ export class EstoqueDetailPage implements OnInit {
   estoqueAtual: Estoque = {
     nome: ''
   };
-  constructor(private estoqueService: EstoqueService, private router: Router, private toastController: ToastController) { 
+  constructor(private estoqueService: EstoqueService, private router: Router, private toastController: ToastController, private locate: Location) { 
     addIcons({sadOutline, add, homeOutline, listOutline, settingsOutline, home, list, settings, remove, trash, create})
 
   }
@@ -57,6 +57,10 @@ export class EstoqueDetailPage implements OnInit {
     this.titulo = this.titulo + nome ;
   }
 
+  goBack() {
+    this.locate.back();
+  }
+
   update(estoqueNew: Estoque){
     console.log(estoqueNew)
     if(this.id != -1 && !isNaN(this.id)){
@@ -64,7 +68,6 @@ export class EstoqueDetailPage implements OnInit {
         next: (value) => {   
         this.mostrarToast()
         
-        //usar pra reload sempre
         setTimeout(() => {
           window.location.reload();
         }, 2000);
@@ -92,7 +95,19 @@ export class EstoqueDetailPage implements OnInit {
       text: 'OK',
       role: 'confirm',
       handler: () => {
-        //excluir estoque
+        if(this.estoqueAtual.id != undefined){
+          this.estoqueService.delete(this.estoqueAtual.id).subscribe({
+            next: (value) => {
+              this.router.navigate([`/estoques`]).then(() => {
+                location.reload();
+              });
+            },
+            error: (err) => {
+              console.log(err)
+            }
+          })
+        }
+      
       },
     },
   ];

@@ -58,4 +58,15 @@ export class EstoqueService {
         })
       );
   }
+
+  delete(id: number): Observable<any>{
+    return this.http.delete<any>(`${API_CONFIG.baseUrl}/Estoque/${id}`)
+    .pipe(
+      map(response => response.data),
+      catchError(error => {
+        console.error('Erro ao obter estoque:', error);
+        return throwError(() => new Error('Falha ao deletar estoque'));
+      })
+    );
+  }
 }

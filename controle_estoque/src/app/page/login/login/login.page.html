@@ -1,26 +1,22 @@
-<ion-header collapse="condense">
-  <ion-toolbar>
-    <ion-title size="large" class="header">Login</ion-title>
-  </ion-toolbar>
-</ion-header>
+
 
 <ion-content [fullscreen]="true">
-
-
-
   <div>
 
     <form [formGroup]="form" (ngSubmit)="logar()">
-      <ion-input label="Email" label-placement="floating" fill="outline" type="email" class="custom-item" formControlName="email"></ion-input>
-      <br>
-      <ion-input label="Senha" label-placement="floating" fill="outline" type="password" class="custom-item" formControlName="senha"></ion-input>
-      
-      <ion-button type="submit" expand="full" class="botao" [disabled]="form.invalid">Enviar</ion-button>
+      <div class="form-container">
+        <ion-input label="Email" label-placement="floating" fill="outline" type="email" class="custom-item" formControlName="email"></ion-input>
+        <br>
+        <ion-input label="Senha" label-placement="floating" fill="outline" type="password" class="custom-item" formControlName="senha"></ion-input>
+      </div>
+      <span class="forget-password">Esqueci minha senha</span>
+      <ion-button type="submit" class="botao" [disabled]="form.invalid">Entrar</ion-button>
     </form>
     
   </div>
 
-  <p (click)="irRegister()">nossa página de ajuda</p>.
+  <p>Não possui conta? </p>
+  <span (click)="irRegister()">Cadastra-se</span>
 </ion-content>
 
 <ion-toast
